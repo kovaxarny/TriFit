@@ -90,7 +90,9 @@ public class MainActivity extends AppCompatActivity
             startWorkoutProgramsActivityIntent.putExtra("Text","Drawer > Workout Programs: " + id);
             startActivity(startWorkoutProgramsActivityIntent);
         } else if (id == R.id.nav_challanges) {
-
+            Intent startChallengesActivityIntent = new Intent(MainActivity.this, ChallengesActivity.class);
+            startChallengesActivityIntent.putExtra("Text","Drawer > Challenges: " + id);
+            startActivity(startChallengesActivityIntent);
         } else if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_about) {

@@ -26,6 +26,10 @@
         <activity
             android:name=".WorkoutProgramsActivity"
             android:label="@string/title_activity_workout_programs"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ChallengesActivity"
+            android:label="@string/title_activity_challenges"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
