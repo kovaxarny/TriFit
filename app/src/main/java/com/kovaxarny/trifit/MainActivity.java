@@ -94,7 +94,9 @@ public class MainActivity extends AppCompatActivity
             startChallengesActivityIntent.putExtra("Text","Drawer > Challenges: " + id);
             startActivity(startChallengesActivityIntent);
         } else if (id == R.id.nav_settings) {
-
+            Intent startSettingsActivityIntent = new Intent(MainActivity.this, SettingsActivity.class);
+            startSettingsActivityIntent.putExtra("Text","Drawer > Settings: " + id);
+            startActivity(startSettingsActivityIntent);
         } else if (id == R.id.nav_about) {
 
         }

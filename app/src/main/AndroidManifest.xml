@@ -30,7 +30,16 @@
         <activity
             android:name=".ChallengesActivity"
             android:label="@string/title_activity_challenges"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kovaxarny.trifit.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
