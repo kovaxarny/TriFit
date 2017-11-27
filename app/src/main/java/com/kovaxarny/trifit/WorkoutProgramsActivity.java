@@ -9,16 +9,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
-public class ProfileActivity extends AppCompatActivity {
+public class WorkoutProgramsActivity extends AppCompatActivity {
 
     private TextView mDisplayText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_workout_programs);
 
-        mDisplayText = (TextView) findViewById(R.id.tv_profile_activity);
+        mDisplayText = (TextView) findViewById(R.id.tv_workout_programs_activity);
 
         Intent callerIntent = getIntent();
 

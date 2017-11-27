@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.kovaxarny.trifit.ProfileActivity"
-    tools:showIn="@layout/activity_profile">
+    tools:context="com.kovaxarny.trifit.WorkoutProgramsActivity"
+    tools:showIn="@layout/activity_workout_programs">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_profile_activity"
+        android:id="@+id/tv_workout_programs_activity"
         android:textSize="24sp"
         android:text="This text should change"/>
 

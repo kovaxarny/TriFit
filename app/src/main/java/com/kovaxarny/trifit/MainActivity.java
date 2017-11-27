@@ -83,10 +83,12 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_profile) {
             Intent startProfileActivityIntent = new Intent(MainActivity.this, ProfileActivity.class);
-            startProfileActivityIntent.putExtra("Text","Start from: " + id);
+            startProfileActivityIntent.putExtra("Text","Drawer > Profile: " + id);
             startActivity(startProfileActivityIntent);
         } else if (id == R.id.nav_workout_programs) {
-
+            Intent startWorkoutProgramsActivityIntent = new Intent(MainActivity.this, WorkoutProgramsActivity.class);
+            startWorkoutProgramsActivityIntent.putExtra("Text","Drawer > Workout Programs: " + id);
+            startActivity(startWorkoutProgramsActivityIntent);
         } else if (id == R.id.nav_challanges) {
 
         } else if (id == R.id.nav_settings) {
