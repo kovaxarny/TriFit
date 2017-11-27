@@ -54,11 +54,12 @@ public class MainActivity extends AppCompatActivity
                 .apply();
 
 
-        boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE).getBoolean("isFirstRun", true);
+        boolean isFirstRun = getSharedPreferences("com.kovaxarny.trifit.Preferences", MODE_PRIVATE).getBoolean("isFirstRun", true);
         if (isFirstRun){
 
-
             Toast.makeText(this, "First Run Yay", Toast.LENGTH_SHORT).show();
+            Intent startFirstRunActivityIntent = new Intent(MainActivity.this, FirstRunActivity.class);
+            startActivity(startFirstRunActivityIntent);
 
             getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                     .edit()
