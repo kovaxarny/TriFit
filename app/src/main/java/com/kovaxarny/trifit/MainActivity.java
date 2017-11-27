@@ -98,7 +98,9 @@ public class MainActivity extends AppCompatActivity
             startSettingsActivityIntent.putExtra("Text","Drawer > Settings: " + id);
             startActivity(startSettingsActivityIntent);
         } else if (id == R.id.nav_about) {
-
+            Intent startAboutActivityIntent = new Intent(MainActivity.this, AboutActivity.class);
+            startAboutActivityIntent.putExtra("Text","Drawer > About: " + id);
+            startActivity(startAboutActivityIntent);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

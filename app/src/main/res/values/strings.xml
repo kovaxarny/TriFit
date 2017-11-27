@@ -9,4 +9,5 @@
     <string name="title_activity_workout_programs">WorkoutProgramsActivity</string>
     <string name="title_activity_challenges">ChallengesActivity</string>
     <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_about">AboutActivity</string>
 </resources>
