@@ -1,4 +1,4 @@
-package com.kovaxarny.trifit;
+package com.kovaxarny.trifit.drawer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,16 +9,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
-public class AboutActivity extends AppCompatActivity {
+import com.kovaxarny.trifit.R;
+
+public class WorkoutProgramsActivity extends AppCompatActivity {
 
     private TextView mDisplayText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about);
+        setContentView(R.layout.activity_workout_programs);
 
-        mDisplayText = (TextView) findViewById(R.id.tv_about_activity);
+        mDisplayText = (TextView) findViewById(R.id.tv_workout_programs_activity);
 
         Intent callerIntent = getIntent();
 

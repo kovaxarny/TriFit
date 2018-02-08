@@ -14,7 +14,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.TextView;
+
+import com.kovaxarny.trifit.drawer.AboutActivity;
+import com.kovaxarny.trifit.drawer.ChallengesActivity;
+import com.kovaxarny.trifit.drawer.ProfileActivity;
+import com.kovaxarny.trifit.drawer.SettingsActivity;
+import com.kovaxarny.trifit.drawer.WorkoutProgramsActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -23,6 +29,10 @@ public class MainActivity extends AppCompatActivity
     private static final Integer activityRequestCode = 1;
 
     private SharedPreferences preferences;
+    private TextView tvUserName;
+    private TextView tvUserBirthDate;
+    private TextView tvUserBodyMassIndex;
+    private TextView tvUserBasalMetabolicRate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +59,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        Intent callerIntent = getIntent();
-
-        if (callerIntent.hasExtra("firstName")){
-            Toast.makeText(this,callerIntent.getStringExtra("firstName"),Toast.LENGTH_SHORT).show();
-        }
-
         preferences = getSharedPreferences("com.kovaxarny.trifit.Preferences", MODE_PRIVATE);
     }
 
@@ -64,13 +68,32 @@ public class MainActivity extends AppCompatActivity
         if (preferences.getBoolean("isFirstRun",true)){
             Intent startFirstRunActivityIntent = new Intent(MainActivity.this, FirstRunActivity.class);
             startActivityForResult(startFirstRunActivityIntent, activityRequestCode);
+        }else{
+            //TODO mi lesz ha ezt kiveszem?
+//            updateUserInfo();
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == activityRequestCode && resultCode == RESULT_OK && data != null) {
-            Toast.makeText(this,data.getStringExtra("firstName"),Toast.LENGTH_SHORT).show();
+//            updateUserInfo();
+            getSharedPreferences("com.kovaxarny.trifit.Preferences", MODE_PRIVATE)
+                    .edit()
+                    .putString("firstName", data.getStringExtra("firstName"))
+                    .putString("lastName", data.getStringExtra("lastName"))
+                    .putString("birthDay", data.getStringExtra("birthDay"))
+                    .putString("gender", data.getStringExtra("gender"))
+                    .apply();
+
+            //TODO ezt kulon metodusba kivinni es meghivni onresumen is de mar nincs erom
+            String result = data.getStringExtra("firstName") + " " +  data.getStringExtra("lastName");
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            View headerView = navigationView.getHeaderView(0);
+            tvUserName = (TextView) headerView.findViewById(R.id.tv_users_name);
+            tvUserName.setText(result);
+            tvUserBirthDate = (TextView) headerView.findViewById(R.id.tv_birth_day);
+            tvUserBirthDate.setText(data.getStringExtra("birthDay"));
         }
     }
 

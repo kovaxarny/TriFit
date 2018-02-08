@@ -68,8 +68,13 @@ public class FirstRunActivity extends AppCompatActivity {
                     getSharedPreferences("com.kovaxarny.trifit.Preferences", MODE_PRIVATE)
                             .edit()
                             .putBoolean("isFirstRun", false)
-                            .commit();
-                    output.putExtra("firstName",firstName.getText().toString());
+                            .apply();
+                    output.putExtra("firstName", firstName.getText().toString());
+                    output.putExtra("lastName", lastName.getText().toString());
+                    output.putExtra("birthDay", birthDay.getText().toString());
+                    output.putExtra("gender", gender.getSelectedItem().toString());
+                    output.putExtra("height", height.getText().toString());
+                    output.putExtra("weight", weight.getText().toString());
                     setResult(RESULT_OK, output);
                     finish();
                 }else{

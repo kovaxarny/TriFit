@@ -1,6 +1,5 @@
-package com.kovaxarny.trifit;
+package com.kovaxarny.trifit.drawer;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,22 +8,21 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
-public class WorkoutProgramsActivity extends AppCompatActivity {
+import com.kovaxarny.trifit.R;
+
+public class ChallengesActivity extends AppCompatActivity {
+
 
     private TextView mDisplayText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_workout_programs);
+        setContentView(R.layout.activity_challenges);
 
-        mDisplayText = (TextView) findViewById(R.id.tv_workout_programs_activity);
+        mDisplayText = (TextView) findViewById(R.id.tv_challenges_activity);
 
-        Intent callerIntent = getIntent();
 
-        if (callerIntent.hasExtra("Text")){
-            mDisplayText.setText(callerIntent.getStringExtra("Text"));
-        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

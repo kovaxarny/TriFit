@@ -1,4 +1,4 @@
-package com.kovaxarny.trifit;
+package com.kovaxarny.trifit.drawer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,23 +9,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
-public class ProfileActivity extends AppCompatActivity {
+import com.kovaxarny.trifit.R;
+
+public class SettingsActivity extends AppCompatActivity {
 
     private TextView mDisplayText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_settings);
 
-        mDisplayText = (TextView) findViewById(R.id.tv_profile_activity);
+        mDisplayText = (TextView) findViewById(R.id.tv_settings_activity);
 
         Intent callerIntent = getIntent();
 
         if (callerIntent.hasExtra("Text")){
             mDisplayText.setText(callerIntent.getStringExtra("Text"));
         }
-
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
