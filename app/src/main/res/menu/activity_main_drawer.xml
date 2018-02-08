@@ -10,26 +10,30 @@
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_account_box_black_24dp"
-            android:title="Profile" />
+            android:title="@string/profile" />
         <item
             android:id="@+id/nav_workout_programs"
             android:icon="@drawable/ic_directions_run_black_24dp"
-            android:title="Workout Programs" />
+            android:title="@string/workout_programs" />
         <item
             android:id="@+id/nav_challanges"
             android:icon="@drawable/ic_timer_black_24dp"
-            android:title="Challanges" />
+            android:title="@string/challanges" />
     </group>
     <group android:id="@+id/nav_group_bot">
 
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Settings" />
+            android:title="@string/settings" />
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_help_black_24dp"
-            android:title="About" />
+            android:title="@string/about" />
+        <item
+            android:id="@+id/nav_reset"
+            android:title="Reset"
+            android:icon="@android:drawable/ic_menu_revert" />
 
     </group>
 

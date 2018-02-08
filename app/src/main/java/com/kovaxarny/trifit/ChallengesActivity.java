@@ -1,6 +1,5 @@
 package com.kovaxarny.trifit;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -21,11 +20,7 @@ public class ChallengesActivity extends AppCompatActivity {
 
         mDisplayText = (TextView) findViewById(R.id.tv_challenges_activity);
 
-        Intent callerIntent = getIntent();
 
-        if (callerIntent.hasExtra("Text")){
-            mDisplayText.setText(callerIntent.getStringExtra("Text"));
-        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

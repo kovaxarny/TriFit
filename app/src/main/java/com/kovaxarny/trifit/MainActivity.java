@@ -1,6 +1,7 @@
 package com.kovaxarny.trifit;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -17,6 +18,11 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private static final String TAG = "MainActivity";
+    private static final Integer activityRequestCode = 1;
+
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,29 +48,32 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        checkFirstRun();
+
+        Intent callerIntent = getIntent();
+
+        if (callerIntent.hasExtra("firstName")){
+            Toast.makeText(this,callerIntent.getStringExtra("firstName"),Toast.LENGTH_SHORT).show();
+        }
+
+        preferences = getSharedPreferences("com.kovaxarny.trifit.Preferences", MODE_PRIVATE);
     }
 
-    public void checkFirstRun() {
-
-        //TODO this 4 lines has to be deleted, before release. Now its in just for testing
-        getSharedPreferences("PREFERENCE", MODE_PRIVATE)
-                .edit()
-                .putBoolean("isFirstRun", true)
-                .apply();
-
-
-        boolean isFirstRun = getSharedPreferences("com.kovaxarny.trifit.Preferences", MODE_PRIVATE).getBoolean("isFirstRun", true);
-        if (isFirstRun){
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (preferences.getBoolean("isFirstRun",true)){
 
             Toast.makeText(this, "First Run Yay", Toast.LENGTH_SHORT).show();
             Intent startFirstRunActivityIntent = new Intent(MainActivity.this, FirstRunActivity.class);
-            startActivity(startFirstRunActivityIntent);
+            startActivityForResult(startFirstRunActivityIntent, activityRequestCode);
 
-            getSharedPreferences("PREFERENCE", MODE_PRIVATE)
-                    .edit()
-                    .putBoolean("isFirstRun", false)
-                    .apply();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == activityRequestCode && resultCode == RESULT_OK && data != null) {
+            Toast.makeText(this,data.getStringExtra("firstName"),Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -124,8 +133,14 @@ public class MainActivity extends AppCompatActivity
             startActivity(startSettingsActivityIntent);
         } else if (id == R.id.nav_about) {
             Intent startAboutActivityIntent = new Intent(MainActivity.this, AboutActivity.class);
-            startAboutActivityIntent.putExtra("Text","Drawer > About: " + id);
+            startAboutActivityIntent.putExtra("Text", "Drawer > About: " + id);
             startActivity(startAboutActivityIntent);
+        }else if (id == R.id.nav_reset){
+            //TODO this 4 lines has to be deleted, before release. Now its in just for testing
+            getSharedPreferences("com.kovaxarny.trifit.Preferences", MODE_PRIVATE)
+                    .edit()
+                    .putBoolean("isFirstRun", true)
+                    .apply();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
