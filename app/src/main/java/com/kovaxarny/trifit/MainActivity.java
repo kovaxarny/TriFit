@@ -62,11 +62,8 @@ public class MainActivity extends AppCompatActivity
     public void onResume() {
         super.onResume();
         if (preferences.getBoolean("isFirstRun",true)){
-
-            Toast.makeText(this, "First Run Yay", Toast.LENGTH_SHORT).show();
             Intent startFirstRunActivityIntent = new Intent(MainActivity.this, FirstRunActivity.class);
             startActivityForResult(startFirstRunActivityIntent, activityRequestCode);
-
         }
     }
 
