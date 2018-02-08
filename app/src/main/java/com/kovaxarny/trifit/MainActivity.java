@@ -69,15 +69,13 @@ public class MainActivity extends AppCompatActivity
             Intent startFirstRunActivityIntent = new Intent(MainActivity.this, FirstRunActivity.class);
             startActivityForResult(startFirstRunActivityIntent, activityRequestCode);
         }else{
-            //TODO mi lesz ha ezt kiveszem?
-//            updateUserInfo();
+            updateUserInfo();
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == activityRequestCode && resultCode == RESULT_OK && data != null) {
-//            updateUserInfo();
             getSharedPreferences("com.kovaxarny.trifit.Preferences", MODE_PRIVATE)
                     .edit()
                     .putString("firstName", data.getStringExtra("firstName"))
@@ -85,16 +83,21 @@ public class MainActivity extends AppCompatActivity
                     .putString("birthDay", data.getStringExtra("birthDay"))
                     .putString("gender", data.getStringExtra("gender"))
                     .apply();
-
-            //TODO ezt kulon metodusba kivinni es meghivni onresumen is de mar nincs erom
-            String result = data.getStringExtra("firstName") + " " +  data.getStringExtra("lastName");
-            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-            View headerView = navigationView.getHeaderView(0);
-            tvUserName = (TextView) headerView.findViewById(R.id.tv_users_name);
-            tvUserName.setText(result);
-            tvUserBirthDate = (TextView) headerView.findViewById(R.id.tv_birth_day);
-            tvUserBirthDate.setText(data.getStringExtra("birthDay"));
+            updateUserInfo();
         }
+    }
+
+    private void updateUserInfo(){
+        preferences = getSharedPreferences("com.kovaxarny.trifit.Preferences", MODE_PRIVATE);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        tvUserBirthDate = (TextView) headerView.findViewById(R.id.tv_birth_day);
+        tvUserName = (TextView) headerView.findViewById(R.id.tv_users_name);
+
+        String result = preferences.getString("firstName","firstName") + " " +  preferences.getString("lastName","lastName");
+
+        tvUserName.setText(result);
+        tvUserBirthDate.setText(preferences.getString("birthDay","birthDay"));
     }
 
     @Override
