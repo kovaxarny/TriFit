@@ -12,6 +12,6 @@ public class BodyStatsContract {
         public static final String TABLE_NAME = "bodystats";
         public static final String COLUMN_HEIGHT = "height";
         public static final String COLUMN_WEIGHT = "weight";
-        public static final String COLUMN_DATE = "date";
+        public static final String COLUMN_TIMESTAMP = "timestamp";
     }
 }
