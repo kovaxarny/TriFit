@@ -2,6 +2,8 @@ package com.kovaxarny.trifit;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -10,12 +12,18 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.kovaxarny.trifit.adapter.StatsListAdapter;
+import com.kovaxarny.trifit.data.BodyStatsContract;
+import com.kovaxarny.trifit.data.BodyStatsDbHelper;
+import com.kovaxarny.trifit.data.TestUtil;
 import com.kovaxarny.trifit.drawer.AboutActivity;
 import com.kovaxarny.trifit.drawer.ChallengesActivity;
 import com.kovaxarny.trifit.drawer.ProfileActivity;
@@ -31,16 +39,22 @@ public class MainActivity extends AppCompatActivity
     private SharedPreferences preferences;
     private TextView tvUserName;
     private TextView tvUserBirthDate;
-    private TextView tvUserBodyMassIndex;
-    private TextView tvUserBasalMetabolicRate;
+
+    private StatsListAdapter mAdapter;
+    private RecyclerView statsListRecycleView;
+
+    private SQLiteDatabase mDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /* Setting up the Toolbar for our activity */
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        /* Floating action button what we will need in the future for new stat input */
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,16 +64,43 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        /* Drawer for our secondary activities */
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        /* Navigation view*/
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        /* Making our preferences available in the whole activity */
         preferences = getSharedPreferences("com.kovaxarny.trifit.Preferences", MODE_PRIVATE);
+
+        /* Accessing the db behind the app */
+        BodyStatsDbHelper dbHelper = new BodyStatsDbHelper(this);
+        mDb = dbHelper.getWritableDatabase();
+        TestUtil.insertFakeData(mDb);
+        Cursor cursor = getAllBodyStats();
+
+        statsListRecycleView = (RecyclerView) findViewById(R.id.all_body_stats_view);
+        statsListRecycleView.setLayoutManager(new LinearLayoutManager(this));
+
+        mAdapter = new StatsListAdapter(this, cursor);
+        statsListRecycleView.setAdapter(mAdapter);
+    }
+
+    private Cursor getAllBodyStats(){
+        return mDb.query(
+                BodyStatsContract.BodyStatsEntry.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                BodyStatsContract.BodyStatsEntry.COLUMN_TIMESTAMP
+        );
     }
 
     @Override
@@ -88,7 +129,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void updateUserInfo(){
-        preferences = getSharedPreferences("com.kovaxarny.trifit.Preferences", MODE_PRIVATE);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
         tvUserBirthDate = (TextView) headerView.findViewById(R.id.tv_birth_day);
