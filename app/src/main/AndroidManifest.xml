@@ -64,7 +64,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kovaxarny.trifit.MainActivity" />
         </activity>
-        <activity android:name=".FirstRunActivity"></activity>
+        <activity android:name=".FirstRunActivity" />
+        <activity android:name=".AddBodyStatActivity"
+            android:windowSoftInputMode = "stateVisible" >
+        </activity>
     </application>
 
 </manifest>

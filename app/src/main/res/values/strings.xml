@@ -10,7 +10,7 @@
     <string name="title_activity_challenges">ChallengesActivity</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="title_activity_about">AboutActivity</string>
-    <string name="first_run_text" >Hi! It looks like this is the first time, you start the app. Please give us some information, so we can get started!</string>
+    <string name="first_run_text">Hi! It looks like this is the first time, you start the app. Please give us some information, so we can get started!</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="birth_date">Birth Date</string>
