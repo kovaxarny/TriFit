@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.kovaxarny.trifit.R;
 import com.kovaxarny.trifit.data.BodyStatsContract;
+import com.kovaxarny.trifit.data.BodyStatsModel;
 
 import java.util.Locale;
 
@@ -39,13 +40,14 @@ public class StatsListAdapter extends RecyclerView.Adapter<StatsListAdapter.Stat
         if (!mCursor.moveToPosition(position))
             return;
 
-        Integer height = mCursor.getInt(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry.COLUMN_HEIGHT));
-        Double weight = mCursor.getDouble(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry.COLUMN_WEIGHT));
-        String date = mCursor.getString(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry.COLUMN_TIMESTAMP));
+        BodyStatsModel bodyStat= new BodyStatsModel();
+        bodyStat.setHeight(mCursor.getInt(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry.COLUMN_HEIGHT)));
+        bodyStat.setWeight(mCursor.getDouble(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry.COLUMN_WEIGHT)));
+        bodyStat.setTimestamp(mCursor.getString(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry.COLUMN_TIMESTAMP)));
 
-        holder.heightTextView.setText(String.valueOf(height));
-        holder.weightTextView.setText(String.format(Locale.US,"%.2f",weight));
-        holder.timeStampTextView.setText(date);
+        holder.heightTextView.setText(String.format(Locale.US,"%d",bodyStat.getHeight()));
+        holder.weightTextView.setText(String.format(Locale.US,"%.2f",bodyStat.getWeight()));
+        holder.timeStampTextView.setText(bodyStat.getTimestamp());
     }
 
     @Override

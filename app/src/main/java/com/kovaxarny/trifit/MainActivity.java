@@ -3,7 +3,6 @@ package com.kovaxarny.trifit;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -21,9 +20,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.kovaxarny.trifit.adapter.StatsListAdapter;
-import com.kovaxarny.trifit.data.BodyStatsContract;
 import com.kovaxarny.trifit.data.BodyStatsDbHelper;
-import com.kovaxarny.trifit.data.TestUtil;
+import com.kovaxarny.trifit.data.BodyStatsOperations;
 import com.kovaxarny.trifit.drawer.AboutActivity;
 import com.kovaxarny.trifit.drawer.ChallengesActivity;
 import com.kovaxarny.trifit.drawer.ProfileActivity;
@@ -34,7 +32,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "MainActivity";
-    private static final Integer activityRequestCode = 1;
+    private static final Integer firstRunActivityCode = 1;
+    private static final Integer addBodyStatsActivityCode = 2;
 
     private SharedPreferences preferences;
     private TextView tvUserName;
@@ -43,7 +42,6 @@ public class MainActivity extends AppCompatActivity
     private StatsListAdapter mAdapter;
     private RecyclerView statsListRecycleView;
 
-    private SQLiteDatabase mDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,10 +77,8 @@ public class MainActivity extends AppCompatActivity
         preferences = getSharedPreferences("com.kovaxarny.trifit.Preferences", MODE_PRIVATE);
 
         /* Accessing the db behind the app */
-        BodyStatsDbHelper dbHelper = new BodyStatsDbHelper(this);
-        mDb = dbHelper.getWritableDatabase();
-        TestUtil.insertFakeData(mDb);
-        Cursor cursor = getAllBodyStats();
+        BodyStatsOperations bodyStatsOperations = new BodyStatsOperations(new BodyStatsDbHelper(this));
+        Cursor cursor = bodyStatsOperations.getAllBodyStats();
 
         statsListRecycleView = (RecyclerView) findViewById(R.id.all_body_stats_view);
         statsListRecycleView.setLayoutManager(new LinearLayoutManager(this));
@@ -91,24 +87,12 @@ public class MainActivity extends AppCompatActivity
         statsListRecycleView.setAdapter(mAdapter);
     }
 
-    private Cursor getAllBodyStats(){
-        return mDb.query(
-                BodyStatsContract.BodyStatsEntry.TABLE_NAME,
-                null,
-                null,
-                null,
-                null,
-                null,
-                BodyStatsContract.BodyStatsEntry.COLUMN_TIMESTAMP
-        );
-    }
-
     @Override
     public void onResume() {
         super.onResume();
         if (preferences.getBoolean("isFirstRun",true)){
             Intent startFirstRunActivityIntent = new Intent(MainActivity.this, FirstRunActivity.class);
-            startActivityForResult(startFirstRunActivityIntent, activityRequestCode);
+            startActivityForResult(startFirstRunActivityIntent, firstRunActivityCode);
         }else{
             updateUserInfo();
         }
@@ -116,7 +100,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == activityRequestCode && resultCode == RESULT_OK && data != null) {
+        if (requestCode == firstRunActivityCode && resultCode == RESULT_OK && data != null) {
             getSharedPreferences("com.kovaxarny.trifit.Preferences", MODE_PRIVATE)
                     .edit()
                     .putString("firstName", data.getStringExtra("firstName"))
