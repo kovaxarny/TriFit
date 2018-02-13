@@ -42,6 +42,8 @@ public class FirstRunActivity extends AppCompatActivity {
         year_x = calendar.get(Calendar.YEAR);
         month_x = calendar.get(Calendar.MONTH);
         day_x = calendar.get(Calendar.DAY_OF_MONTH);
+        birthDay = (EditText) findViewById(R.id.et_birth_date);
+        updateEditText();
         showDialogOnEditTextClick();
 
         gender = (Spinner) findViewById(R.id.spinner_gender);
@@ -85,7 +87,7 @@ public class FirstRunActivity extends AppCompatActivity {
     }
 
     private void showDialogOnEditTextClick(){
-        birthDay = (EditText) findViewById(R.id.et_birth_date);
+
         birthDay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
