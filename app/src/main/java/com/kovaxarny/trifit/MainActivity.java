@@ -27,6 +27,9 @@ import com.kovaxarny.trifit.drawer.ChallengesActivity;
 import com.kovaxarny.trifit.drawer.ProfileActivity;
 import com.kovaxarny.trifit.drawer.SettingsActivity;
 import com.kovaxarny.trifit.drawer.WorkoutProgramsActivity;
+import com.kovaxarny.trifit.statistics.BodyIndex;
+
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -36,16 +39,19 @@ public class MainActivity extends AppCompatActivity
     private static final Integer addBodyStatsActivityCode = 2;
 
     private SharedPreferences preferences;
-    private TextView tvUserName;
-    private TextView tvUserBirthDate;
+    TextView tvUserName;
+    TextView tvUserBirthDate;
+    TextView tvUserBMI;
+    TextView tvUserBMR;
+    BodyIndex bodyIndex = new BodyIndex();
 
     private StatsListAdapter mAdapter;
-    private RecyclerView statsListRecycleView;
+    RecyclerView statsListRecycleView;
 
     private BodyStatsOperations bodyStatsOperations;
     private BodyStatsDbHelper dbHelper = new BodyStatsDbHelper(this);
 
-
+    //TODO calculate BMI BMR, etc, look for how to draw graphs
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,7 +118,6 @@ public class MainActivity extends AppCompatActivity
                     .putString("birthDay", data.getStringExtra("birthDay"))
                     .putString("gender", data.getStringExtra("gender"))
                     .apply();
-            updateUserInfo();
 
             BodyStatsModel model = new BodyStatsModel();
             model.setHeight(data.getIntExtra("height", 1));
@@ -121,6 +126,8 @@ public class MainActivity extends AppCompatActivity
 
             bodyStatsOperations.addNewBodyStat(model);
             mAdapter.swapCursor(bodyStatsOperations.getAllBodyStats());
+
+            updateUserInfo();
         }
 
         if (requestCode == addBodyStatsActivityCode && resultCode == RESULT_OK && data != null) {
@@ -137,13 +144,30 @@ public class MainActivity extends AppCompatActivity
     private void updateUserInfo() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
-        tvUserBirthDate = (TextView) headerView.findViewById(R.id.tv_birth_day);
         tvUserName = (TextView) headerView.findViewById(R.id.tv_users_name);
+        tvUserBirthDate = (TextView) headerView.findViewById(R.id.tv_birth_day);
+        tvUserBMI = (TextView) headerView.findViewById(R.id.tv_bmi);
+        tvUserBMR = (TextView) headerView.findViewById(R.id.tv_bmr);
 
         String result = preferences.getString("firstName", "firstName") + " " + preferences.getString("lastName", "lastName");
 
         tvUserName.setText(result);
         tvUserBirthDate.setText(preferences.getString("birthDay", "birthDay"));
+
+        BodyStatsModel model = new BodyStatsModel(bodyStatsOperations.getLatestData());
+        tvUserBMI.setText(String.format(Locale.US, "%.2f" ,
+                bodyIndex.calculateBodyMassIndex(
+                        model.getHeight(),
+                        model.getWeight()
+                )));
+        tvUserBMR.setText(String.format(Locale.US, "%d",
+                bodyIndex.calculateBasalMetabolicRate(
+                        model.getHeight(),
+                        model.getWeight(),
+                        preferences.getString("gender","gender"),
+                        preferences.getString("birthDay", "birthDay")
+                )));
+
     }
 
     @Override

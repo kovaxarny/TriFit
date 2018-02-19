@@ -53,6 +53,32 @@ public class BodyStatsOperations {
         mDb.delete(BodyStatsContract.BodyStatsEntry.TABLE_NAME,null,null);
     }
 
+    public BodyStatsModel getLatestData(){
+        BodyStatsModel stats = new BodyStatsModel();
+
+        Cursor mCursor = mDb.query(
+                BodyStatsContract.BodyStatsEntry.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                BodyStatsContract.BodyStatsEntry._ID + " DESC",
+                "1"
+        );
+
+        if (mCursor.moveToFirst())
+        {
+            do {
+                stats.setHeight(mCursor.getInt(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry.COLUMN_HEIGHT)));
+                stats.setWeight(mCursor.getDouble(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry.COLUMN_WEIGHT)));
+                stats.setTimestamp(mCursor.getString(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry.COLUMN_TIMESTAMP)));
+            } while(mCursor.moveToNext());
+        }
+
+        return stats;
+    }
+
 
 
 }

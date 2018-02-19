@@ -17,6 +17,12 @@ public class BodyStatsModel {
         this.timestamp = timestamp;
     }
 
+    public BodyStatsModel(BodyStatsModel model) {
+        this.height = model.height;
+        this.weight = model.weight;
+        this.timestamp = model.timestamp;
+    }
+
     public BodyStatsModel() {
     }
 
