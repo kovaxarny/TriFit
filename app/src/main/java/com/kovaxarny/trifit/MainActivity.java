@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity
     private BodyStatsOperations bodyStatsOperations;
     private BodyStatsDbHelper dbHelper = new BodyStatsDbHelper(this);
 
-    //TODO calculate BMI BMR, etc, look for how to draw graphs
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -155,7 +154,7 @@ public class MainActivity extends AppCompatActivity
         tvUserBirthDate.setText(preferences.getString("birthDay", "birthDay"));
 
         BodyStatsModel model = new BodyStatsModel(bodyStatsOperations.getLatestData());
-        tvUserBMI.setText(String.format(Locale.US, "%.2f" ,
+        tvUserBMI.setText(String.format(Locale.US, "%.2f",
                 bodyIndex.calculateBodyMassIndex(
                         model.getHeight(),
                         model.getWeight()
@@ -164,7 +163,7 @@ public class MainActivity extends AppCompatActivity
                 bodyIndex.calculateBasalMetabolicRate(
                         model.getHeight(),
                         model.getWeight(),
-                        preferences.getString("gender","gender"),
+                        preferences.getString("gender", "gender"),
                         preferences.getString("birthDay", "birthDay")
                 )));
 
