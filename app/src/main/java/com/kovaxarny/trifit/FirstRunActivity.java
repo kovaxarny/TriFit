@@ -15,6 +15,7 @@ import android.widget.Spinner;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class FirstRunActivity extends AppCompatActivity {
@@ -75,8 +76,9 @@ public class FirstRunActivity extends AppCompatActivity {
                     output.putExtra("lastName", lastName.getText().toString());
                     output.putExtra("birthDay", birthDay.getText().toString());
                     output.putExtra("gender", gender.getSelectedItem().toString());
-                    output.putExtra("height", height.getText().toString());
-                    output.putExtra("weight", weight.getText().toString());
+                    output.putExtra("height", Integer.parseInt(height.getText().toString()));
+                    output.putExtra("weight", Double.parseDouble(weight.getText().toString()));
+                    output.putExtra("date", formatDate(Calendar.getInstance().getTime()));
                     setResult(RESULT_OK, output);
                     finish();
                 }else{
@@ -114,9 +116,12 @@ public class FirstRunActivity extends AppCompatActivity {
     };
 
     private void updateEditText(){
+        birthDay.setText(formatDate(calendar.getTime()));
+    }
+
+    private String formatDate(Date date){
         String myFormat = "yyyy-MM-dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
-        birthDay.setText(sdf.format(calendar.getTime()));
+        return sdf.format(date);
     }
 }
