@@ -40,6 +40,17 @@ public class BodyStatsOperations {
         return mDb.insert(BodyStatsContract.BodyStatsEntry.TABLE_NAME, null, cv);
     }
 
+    public long addNewBodyStat (BodyStatsModel model){
+
+        ContentValues cv = new ContentValues();
+
+        cv.put(BodyStatsContract.BodyStatsEntry.COLUMN_HEIGHT, model.getHeight());
+        cv.put(BodyStatsContract.BodyStatsEntry.COLUMN_WEIGHT, model.getWeight());
+        cv.put(BodyStatsContract.BodyStatsEntry.COLUMN_TIMESTAMP, model.getTimestamp());
+
+        return mDb.insert(BodyStatsContract.BodyStatsEntry.TABLE_NAME, null, cv);
+    }
+
     public void deleteData(){
         mDb.delete(BodyStatsContract.BodyStatsEntry.TABLE_NAME,null,null);
     }

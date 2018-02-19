@@ -54,8 +54,7 @@ public class BodyStatsModel {
 
     @Override
     public String toString() {
-        return  "Stat Id=" + get_id() +
-                " Height=" + getHeight() +
+        return  " Height=" + getHeight() +
                 " Weight=" + getWeight() +
                 " Timestamp=" + getTimestamp();
     }

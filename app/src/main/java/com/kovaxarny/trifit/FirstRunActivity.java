@@ -43,6 +43,10 @@ public class FirstRunActivity extends AppCompatActivity {
         year_x = calendar.get(Calendar.YEAR);
         month_x = calendar.get(Calendar.MONTH);
         day_x = calendar.get(Calendar.DAY_OF_MONTH);
+
+        //TODO setting date to my birthday for faster manual testing
+        calendar.set(1996,11,4);
+
         birthDay = (EditText) findViewById(R.id.et_birth_date);
         updateEditText();
         showDialogOnEditTextClick();

@@ -17,10 +17,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.kovaxarny.trifit.adapter.StatsListAdapter;
 import com.kovaxarny.trifit.data.BodyStatsDbHelper;
+import com.kovaxarny.trifit.data.BodyStatsModel;
 import com.kovaxarny.trifit.data.BodyStatsOperations;
 import com.kovaxarny.trifit.drawer.AboutActivity;
 import com.kovaxarny.trifit.drawer.ChallengesActivity;
@@ -113,10 +113,14 @@ public class MainActivity extends AppCompatActivity
                     .putString("gender", data.getStringExtra("gender"))
                     .apply();
             updateUserInfo();
-            Integer height = data.getIntExtra("height",1 );
-            Double weight = data.getDoubleExtra("weight", 1.0);
-            String date = data.getStringExtra("date");
-            Toast.makeText(this, height.toString() + " " + weight.toString() + " " + date, Toast.LENGTH_LONG).show();
+
+            BodyStatsModel model = new BodyStatsModel();
+            model.setHeight(data.getIntExtra("height",1 ));
+            model.setWeight(data.getDoubleExtra("weight", 1.0));
+            model.setTimestamp(data.getStringExtra("date"));
+
+            bodyStatsOperations.addNewBodyStat(model);
+            mAdapter.swapCursor(bodyStatsOperations.getAllBodyStats());
         }
         if (requestCode == addBodyStatsActivityCode && resultCode == RESULT_OK && data != null) {
             Integer addHeight = data.getIntExtra("addHeight", 1);
