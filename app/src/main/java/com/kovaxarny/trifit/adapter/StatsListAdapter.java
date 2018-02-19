@@ -69,4 +69,14 @@ public class StatsListAdapter extends RecyclerView.Adapter<StatsListAdapter.Stat
         }
 
     }
+
+    public void swapCursor(Cursor newCursor) {
+        // Always close the previous mCursor first
+        if (mCursor != null) mCursor.close();
+        mCursor = newCursor;
+        if (newCursor != null) {
+            // Force the RecyclerView to refresh
+            this.notifyDataSetChanged();
+        }
+    }
 }

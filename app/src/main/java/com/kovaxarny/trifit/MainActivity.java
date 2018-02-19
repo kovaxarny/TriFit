@@ -17,7 +17,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.kovaxarny.trifit.adapter.StatsListAdapter;
 import com.kovaxarny.trifit.data.BodyStatsDbHelper;
@@ -41,6 +40,9 @@ public class MainActivity extends AppCompatActivity
 
     private StatsListAdapter mAdapter;
     private RecyclerView statsListRecycleView;
+
+    private BodyStatsOperations bodyStatsOperations;
+    private BodyStatsDbHelper dbHelper = new BodyStatsDbHelper(this);
 
 
     @Override
@@ -77,9 +79,10 @@ public class MainActivity extends AppCompatActivity
         preferences = getSharedPreferences("com.kovaxarny.trifit.Preferences", MODE_PRIVATE);
 
         /* Accessing the db behind the app */
-        BodyStatsOperations bodyStatsOperations = new BodyStatsOperations(new BodyStatsDbHelper(this));
+        bodyStatsOperations = new BodyStatsOperations(dbHelper);
         Cursor cursor = bodyStatsOperations.getAllBodyStats();
 
+        /* Showing database data on the Main Activity*/
         statsListRecycleView = (RecyclerView) findViewById(R.id.all_body_stats_view);
         statsListRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -90,10 +93,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onResume() {
         super.onResume();
-        if (preferences.getBoolean("isFirstRun",true)){
+        if (preferences.getBoolean("isFirstRun", true)) {
             Intent startFirstRunActivityIntent = new Intent(MainActivity.this, FirstRunActivity.class);
             startActivityForResult(startFirstRunActivityIntent, firstRunActivityCode);
-        }else{
+        } else {
             updateUserInfo();
         }
     }
@@ -110,21 +113,27 @@ public class MainActivity extends AppCompatActivity
                     .apply();
             updateUserInfo();
         }
-        if (requestCode == addBodyStatsActivityCode && resultCode == RESULT_OK && data != null){
-            Toast.makeText(this,"Returned from add new data",Toast.LENGTH_SHORT).show();
+        if (requestCode == addBodyStatsActivityCode && resultCode == RESULT_OK && data != null) {
+            Integer addHeight = data.getIntExtra("addHeight", 1);
+            Double addWeight = data.getDoubleExtra("addWeight", 1);
+            String addDate = data.getStringExtra("addDate");
+
+            bodyStatsOperations.addNewBodyStat(addHeight, addWeight, addDate);
+
+            mAdapter.swapCursor(bodyStatsOperations.getAllBodyStats());
         }
     }
 
-    private void updateUserInfo(){
+    private void updateUserInfo() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
         tvUserBirthDate = (TextView) headerView.findViewById(R.id.tv_birth_day);
         tvUserName = (TextView) headerView.findViewById(R.id.tv_users_name);
 
-        String result = preferences.getString("firstName","firstName") + " " +  preferences.getString("lastName","lastName");
+        String result = preferences.getString("firstName", "firstName") + " " + preferences.getString("lastName", "lastName");
 
         tvUserName.setText(result);
-        tvUserBirthDate.setText(preferences.getString("birthDay","birthDay"));
+        tvUserBirthDate.setText(preferences.getString("birthDay", "birthDay"));
     }
 
     @Override
@@ -139,19 +148,14 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -162,35 +166,36 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {
             Intent startProfileActivityIntent = new Intent(MainActivity.this, ProfileActivity.class);
-            startProfileActivityIntent.putExtra("Text","Drawer > Profile: " + id);
+            startProfileActivityIntent.putExtra("Text", "Drawer > Profile: " + id);
             startActivity(startProfileActivityIntent);
         } else if (id == R.id.nav_workout_programs) {
             Intent startWorkoutProgramsActivityIntent = new Intent(MainActivity.this, WorkoutProgramsActivity.class);
-            startWorkoutProgramsActivityIntent.putExtra("Text","Drawer > Workout Programs: " + id);
+            startWorkoutProgramsActivityIntent.putExtra("Text", "Drawer > Workout Programs: " + id);
             startActivity(startWorkoutProgramsActivityIntent);
         } else if (id == R.id.nav_challanges) {
             Intent startChallengesActivityIntent = new Intent(MainActivity.this, ChallengesActivity.class);
-            startChallengesActivityIntent.putExtra("Text","Drawer > Challenges: " + id);
+            startChallengesActivityIntent.putExtra("Text", "Drawer > Challenges: " + id);
             startActivity(startChallengesActivityIntent);
         } else if (id == R.id.nav_settings) {
             Intent startSettingsActivityIntent = new Intent(MainActivity.this, SettingsActivity.class);
-            startSettingsActivityIntent.putExtra("Text","Drawer > Settings: " + id);
+            startSettingsActivityIntent.putExtra("Text", "Drawer > Settings: " + id);
             startActivity(startSettingsActivityIntent);
         } else if (id == R.id.nav_about) {
             Intent startAboutActivityIntent = new Intent(MainActivity.this, AboutActivity.class);
             startAboutActivityIntent.putExtra("Text", "Drawer > About: " + id);
             startActivity(startAboutActivityIntent);
-        }else if (id == R.id.nav_reset){
+        } else if (id == R.id.nav_reset) {
             //TODO this 4 lines has to be deleted, before release. Now its in just for testing
             getSharedPreferences("com.kovaxarny.trifit.Preferences", MODE_PRIVATE)
                     .edit()
                     .putBoolean("isFirstRun", true)
                     .apply();
+            bodyStatsOperations.deleteData();
+            mAdapter.swapCursor(bodyStatsOperations.getAllBodyStats());
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

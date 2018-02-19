@@ -87,7 +87,6 @@ public class FirstRunActivity extends AppCompatActivity {
     }
 
     private void showDialogOnEditTextClick(){
-
         birthDay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,7 +114,7 @@ public class FirstRunActivity extends AppCompatActivity {
     };
 
     private void updateEditText(){
-        String myFormat = "yyyy/MM/dd"; //In which you need put here
+        String myFormat = "yyyy-MM-dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         birthDay.setText(sdf.format(calendar.getTime()));

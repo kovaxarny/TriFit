@@ -55,8 +55,8 @@ public class AddBodyStatActivity extends AppCompatActivity {
         public void onClick(View view) {
             Intent output = new Intent();
             if (!etAddHeight.getText().toString().equals("") && !etAddWeight.getText().toString().equals("") && !etAddDate.getText().toString().equals("")){
-                output.putExtra("addWeight", etAddHeight.getText().toString());
-                output.putExtra("addHeight", etAddWeight.getText().toString());
+                output.putExtra("addHeight", Integer.parseInt(etAddHeight.getText().toString()));
+                output.putExtra("addWeight", Double.parseDouble(etAddWeight.getText().toString()));
                 output.putExtra("addDate", etAddDate.getText().toString());
                 setResult(RESULT_OK, output);
                 finish();
@@ -94,7 +94,7 @@ public class AddBodyStatActivity extends AppCompatActivity {
     };
 
     private void updateEditText(){
-        String myFormat = "yyyy/MM/dd"; //In which you need put here
+        String myFormat = "yyyy-MM-dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         etAddDate.setText(sdf.format(calendar.getTime()));
