@@ -56,7 +56,6 @@ public class StatsListAdapter extends RecyclerView.Adapter<StatsListAdapter.Stat
     }
 
     class StatsViewHolder extends RecyclerView.ViewHolder {
-
         TextView heightTextView;
         TextView weightTextView;
         TextView timeStampTextView;
@@ -67,7 +66,6 @@ public class StatsListAdapter extends RecyclerView.Adapter<StatsListAdapter.Stat
             weightTextView = (TextView) itemView.findViewById(R.id.weight_text_view);
             timeStampTextView = (TextView) itemView.findViewById(R.id.timestamp_text_view);
         }
-
     }
 
     public void swapCursor(Cursor newCursor) {

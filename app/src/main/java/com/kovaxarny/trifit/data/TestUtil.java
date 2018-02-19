@@ -13,7 +13,7 @@ public class TestUtil {
         if(db == null){
             return;
         }
-        //create a list of fake guests
+        //create a list of fake data
         List<ContentValues> list = new ArrayList<ContentValues>();
 
         ContentValues cv = new ContentValues();
@@ -41,7 +41,7 @@ public class TestUtil {
         cv.put(BodyStatsContract.BodyStatsEntry.COLUMN_WEIGHT, 71.0);
         list.add(cv);
 
-        //insert all guests in one transaction
+        //insert all data in one transaction
         try
         {
             db.beginTransaction();

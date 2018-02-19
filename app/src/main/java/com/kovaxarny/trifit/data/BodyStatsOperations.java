@@ -30,7 +30,6 @@ public class BodyStatsOperations {
     }
 
     public long addNewBodyStat (Integer height, Double weight, String stringDate){
-
         ContentValues cv = new ContentValues();
 
         cv.put(BodyStatsContract.BodyStatsEntry.COLUMN_HEIGHT, height);
@@ -41,7 +40,6 @@ public class BodyStatsOperations {
     }
 
     public long addNewBodyStat (BodyStatsModel model){
-
         ContentValues cv = new ContentValues();
 
         cv.put(BodyStatsContract.BodyStatsEntry.COLUMN_HEIGHT, model.getHeight());

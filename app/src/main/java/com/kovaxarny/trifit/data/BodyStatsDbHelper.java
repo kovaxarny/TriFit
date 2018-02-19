@@ -28,7 +28,6 @@ public class BodyStatsDbHelper extends SQLiteOpenHelper{
                 BodyStatsEntry.COLUMN_WEIGHT + " REAL NOT NULL," +
                 BodyStatsEntry.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP" +
                 ");";
-
         sqLiteDatabase.execSQL(SQL_CREATE_BODYSTATS_TABLE);
     }
 

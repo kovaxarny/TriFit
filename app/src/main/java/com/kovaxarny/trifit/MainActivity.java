@@ -115,13 +115,14 @@ public class MainActivity extends AppCompatActivity
             updateUserInfo();
 
             BodyStatsModel model = new BodyStatsModel();
-            model.setHeight(data.getIntExtra("height",1 ));
+            model.setHeight(data.getIntExtra("height", 1));
             model.setWeight(data.getDoubleExtra("weight", 1.0));
             model.setTimestamp(data.getStringExtra("date"));
 
             bodyStatsOperations.addNewBodyStat(model);
             mAdapter.swapCursor(bodyStatsOperations.getAllBodyStats());
         }
+
         if (requestCode == addBodyStatsActivityCode && resultCode == RESULT_OK && data != null) {
             Integer addHeight = data.getIntExtra("addHeight", 1);
             Double addWeight = data.getDoubleExtra("addWeight", 1);
