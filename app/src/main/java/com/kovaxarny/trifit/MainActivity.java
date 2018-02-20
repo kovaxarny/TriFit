@@ -35,6 +35,8 @@ import com.kovaxarny.trifit.statistics.BodyIndex;
 
 import java.util.Locale;
 
+
+//TODO fix issues, search for udemy course
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity
     RecyclerView rssFeedRecycleView;
     RSSObject rssObject;
 
-    private static final String RSS_LINK = "http://rss.nytimes.com/services/xml/rss/nyt/Nutrition.xml";
+    private static final String RSS_LINK = "https://www.bodybuilding.com/rss/articles";
     private static final String RSS_TO_JSON_API = " https://api.rss2json.com/v1/api.json?rss_url=";
 
     private SharedPreferences preferences;

@@ -16,42 +16,9 @@ import com.kovaxarny.trifit.rss.RSSObject;
 /**
  * Created by kovax on 2018-02-20.
  */
-class FeedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener{
 
-    public TextView tvTitle;
-    public TextView tvPubDate;
-    public TextView tvContent;
 
-    private ItemClickListener itemClickListener;
-
-    public FeedViewHolder(View itemView) {
-        super(itemView);
-
-        tvTitle = (TextView) itemView.findViewById(R.id.tv_rss_title);
-        tvPubDate = (TextView) itemView.findViewById(R.id.tv_rss_pubDate);
-        tvContent = (TextView) itemView.findViewById(R.id.tv_rss_content);
-
-        itemView.setOnClickListener(this);
-        itemView.setOnLongClickListener(this);
-    }
-
-    public void setItemClickListener(ItemClickListener itemClickListener) {
-        this.itemClickListener = itemClickListener;
-    }
-
-    @Override
-    public void onClick(View view) {
-        itemClickListener.onClick(view, getAdapterPosition(), false);
-    }
-
-    @Override
-    public boolean onLongClick(View view) {
-        itemClickListener.onClick(view, getAdapterPosition(), true);
-        return true;
-    }
-}
-
-public class RSSFeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
+public class RSSFeedAdapter extends RecyclerView.Adapter<RSSFeedAdapter.FeedViewHolder>{
 
     private RSSObject rssObject;
     private Context mContext;
@@ -90,5 +57,40 @@ public class RSSFeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
     @Override
     public int getItemCount() {
         return rssObject.items.size();
+    }
+
+    class FeedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener{
+
+        public TextView tvTitle;
+        public TextView tvPubDate;
+        public TextView tvContent;
+
+        private ItemClickListener itemClickListener;
+
+        public FeedViewHolder(View itemView) {
+            super(itemView);
+
+            tvTitle = (TextView) itemView.findViewById(R.id.tv_rss_title);
+            tvPubDate = (TextView) itemView.findViewById(R.id.tv_rss_pubDate);
+            tvContent = (TextView) itemView.findViewById(R.id.tv_rss_content);
+
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
+        }
+
+        public void setItemClickListener(ItemClickListener itemClickListener) {
+            this.itemClickListener = itemClickListener;
+        }
+
+        @Override
+        public void onClick(View view) {
+            itemClickListener.onClick(view, getAdapterPosition(), false);
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            itemClickListener.onClick(view, getAdapterPosition(), true);
+            return true;
+        }
     }
 }
