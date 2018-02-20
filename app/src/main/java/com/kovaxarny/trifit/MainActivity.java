@@ -3,6 +3,7 @@ package com.kovaxarny.trifit;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -18,7 +19,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.kovaxarny.trifit.adapter.StatsListAdapter;
+import com.google.gson.Gson;
+import com.kovaxarny.trifit.adapter.RSSFeedAdapter;
+import com.kovaxarny.trifit.common.HTTPDataHandler;
 import com.kovaxarny.trifit.data.BodyStatsDbHelper;
 import com.kovaxarny.trifit.data.BodyStatsModel;
 import com.kovaxarny.trifit.data.BodyStatsOperations;
@@ -27,6 +30,7 @@ import com.kovaxarny.trifit.drawer.ChallengesActivity;
 import com.kovaxarny.trifit.drawer.ProfileActivity;
 import com.kovaxarny.trifit.drawer.SettingsActivity;
 import com.kovaxarny.trifit.drawer.WorkoutProgramsActivity;
+import com.kovaxarny.trifit.rss.RSSObject;
 import com.kovaxarny.trifit.statistics.BodyIndex;
 
 import java.util.Locale;
@@ -38,6 +42,13 @@ public class MainActivity extends AppCompatActivity
     private static final Integer firstRunActivityCode = 1;
     private static final Integer addBodyStatsActivityCode = 2;
 
+    Toolbar toolbar;
+    RecyclerView rssFeedRecycleView;
+    RSSObject rssObject;
+
+    private static final String RSS_LINK = "http://rss.nytimes.com/services/xml/rss/nyt/Nutrition.xml";
+    private static final String RSS_TO_JSON_API = " https://api.rss2json.com/v1/api.json?rss_url=";
+
     private SharedPreferences preferences;
     TextView tvUserName;
     TextView tvUserBirthDate;
@@ -45,8 +56,8 @@ public class MainActivity extends AppCompatActivity
     TextView tvUserBMR;
     BodyIndex bodyIndex = new BodyIndex();
 
-    private StatsListAdapter mAdapter;
-    RecyclerView statsListRecycleView;
+//    private StatsListAdapter mAdapter;
+//    RecyclerView statsListRecycleView;
 
     private BodyStatsOperations bodyStatsOperations;
     private BodyStatsDbHelper dbHelper = new BodyStatsDbHelper(this);
@@ -89,11 +100,43 @@ public class MainActivity extends AppCompatActivity
         Cursor cursor = bodyStatsOperations.getAllBodyStats();
 
         /* Showing database data on the Main Activity*/
-        statsListRecycleView = (RecyclerView) findViewById(R.id.all_body_stats_view);
-        statsListRecycleView.setLayoutManager(new LinearLayoutManager(this));
+//        statsListRecycleView = (RecyclerView) findViewById(R.id.all_body_stats_view);
+//        statsListRecycleView.setLayoutManager(new LinearLayoutManager(this));
+//
+//        mAdapter = new StatsListAdapter(this, cursor);
+//        statsListRecycleView.setAdapter(mAdapter);
 
-        mAdapter = new StatsListAdapter(this, cursor);
-        statsListRecycleView.setAdapter(mAdapter);
+        /* RSS feed*/
+        rssFeedRecycleView = (RecyclerView) findViewById(R.id.all_body_stats_view);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getBaseContext(),LinearLayoutManager.VERTICAL,false);
+        rssFeedRecycleView.setLayoutManager(linearLayoutManager);
+        
+        loadRSS();
+    }
+
+    private void loadRSS() {
+         AsyncTask<String, String, String> loadRSSAsync = new AsyncTask<String, String, String>() {
+
+             @Override
+            protected String doInBackground(String... strings) {
+                String result;
+                HTTPDataHandler httpDataHandler = new HTTPDataHandler();
+                result = httpDataHandler.GetHTTPData(strings[0]);
+                return result;
+            }
+
+             @Override
+             protected void onPostExecute(String s) {
+                 rssObject = new Gson().fromJson(s,RSSObject.class);
+                 RSSFeedAdapter rssFeedAdapter = new RSSFeedAdapter(rssObject,getBaseContext());
+                 rssFeedRecycleView.setAdapter(rssFeedAdapter);
+                 rssFeedAdapter.notifyDataSetChanged();
+             }
+         };
+
+         StringBuilder url_get_data = new StringBuilder(RSS_TO_JSON_API);
+         url_get_data.append(RSS_LINK);
+         loadRSSAsync.execute(url_get_data.toString());
     }
 
     @Override
@@ -124,7 +167,7 @@ public class MainActivity extends AppCompatActivity
             model.setTimestamp(data.getStringExtra("date"));
 
             bodyStatsOperations.addNewBodyStat(model);
-            mAdapter.swapCursor(bodyStatsOperations.getAllBodyStats());
+//            mAdapter.swapCursor(bodyStatsOperations.getAllBodyStats());
 
             updateUserInfo();
         }
@@ -136,7 +179,7 @@ public class MainActivity extends AppCompatActivity
 
             bodyStatsOperations.addNewBodyStat(addHeight, addWeight, addDate);
 
-            mAdapter.swapCursor(bodyStatsOperations.getAllBodyStats());
+//            mAdapter.swapCursor(bodyStatsOperations.getAllBodyStats());
         }
     }
 
@@ -189,8 +232,8 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_refresh) {
+            loadRSS();
         }
 
         return super.onOptionsItemSelected(item);
@@ -228,7 +271,7 @@ public class MainActivity extends AppCompatActivity
                     .putBoolean("isFirstRun", true)
                     .apply();
             bodyStatsOperations.deleteData();
-            mAdapter.swapCursor(bodyStatsOperations.getAllBodyStats());
+//            mAdapter.swapCursor(bodyStatsOperations.getAllBodyStats());
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
