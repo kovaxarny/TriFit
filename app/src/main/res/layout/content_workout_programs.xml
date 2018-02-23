@@ -13,6 +13,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/tv_workout_programs_activity"
         android:textSize="24sp"
-        android:text="This text should change"/>
+        android:text="This text should change" />
 
 </android.support.constraint.ConstraintLayout>
