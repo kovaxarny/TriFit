@@ -56,7 +56,13 @@ public class RSSFeedAdapter extends RecyclerView.Adapter<RSSFeedAdapter.FeedView
 
     @Override
     public int getItemCount() {
-        return rssObject.items.size();
+        if (rssObject != null){
+            return rssObject.items.size();
+        }
+        else{
+            return 0;
+        }
+
     }
 
     class FeedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener{

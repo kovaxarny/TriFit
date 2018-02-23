@@ -18,9 +18,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.kovaxarny.trifit.adapter.RSSFeedAdapter;
+import com.kovaxarny.trifit.common.CheckNetwork;
 import com.kovaxarny.trifit.common.HTTPDataHandler;
 import com.kovaxarny.trifit.data.BodyStatsDbHelper;
 import com.kovaxarny.trifit.data.BodyStatsModel;
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity
     private static final Integer addBodyStatsActivityCode = 2;
 
     Toolbar toolbar;
+
     RecyclerView rssFeedRecycleView;
     RSSObject rssObject;
 
@@ -57,9 +60,6 @@ public class MainActivity extends AppCompatActivity
     TextView tvUserBMI;
     TextView tvUserBMR;
     BodyIndex bodyIndex = new BodyIndex();
-
-//    private StatsListAdapter mAdapter;
-//    RecyclerView statsListRecycleView;
 
     private BodyStatsOperations bodyStatsOperations;
     private BodyStatsDbHelper dbHelper = new BodyStatsDbHelper(this);
@@ -110,35 +110,39 @@ public class MainActivity extends AppCompatActivity
 
         /* RSS feed*/
         rssFeedRecycleView = (RecyclerView) findViewById(R.id.all_body_stats_view);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getBaseContext(),LinearLayoutManager.VERTICAL,false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false);
         rssFeedRecycleView.setLayoutManager(linearLayoutManager);
-        
+
         loadRSS();
     }
 
     private void loadRSS() {
-         AsyncTask<String, String, String> loadRSSAsync = new AsyncTask<String, String, String>() {
+        if (CheckNetwork.isInternetAvailable(MainActivity.this)) {
+            AsyncTask<String, String, String> loadRSSAsync = new AsyncTask<String, String, String>() {
 
-             @Override
-            protected String doInBackground(String... strings) {
-                String result;
-                HTTPDataHandler httpDataHandler = new HTTPDataHandler();
-                result = httpDataHandler.GetHTTPData(strings[0]);
-                return result;
-            }
+                @Override
+                protected String doInBackground(String... strings) {
+                    String result;
+                    HTTPDataHandler httpDataHandler = new HTTPDataHandler();
+                    result = httpDataHandler.GetHTTPData(strings[0]);
+                    return result;
+                }
 
-             @Override
-             protected void onPostExecute(String s) {
-                 rssObject = new Gson().fromJson(s,RSSObject.class);
-                 RSSFeedAdapter rssFeedAdapter = new RSSFeedAdapter(rssObject,getBaseContext());
-                 rssFeedRecycleView.setAdapter(rssFeedAdapter);
-                 rssFeedAdapter.notifyDataSetChanged();
-             }
-         };
+                @Override
+                protected void onPostExecute(String s) {
+                    findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                    rssObject = new Gson().fromJson(s, RSSObject.class);
+                    RSSFeedAdapter rssFeedAdapter = new RSSFeedAdapter(rssObject, getBaseContext());
+                    rssFeedRecycleView.setAdapter(rssFeedAdapter);
+                    rssFeedAdapter.notifyDataSetChanged();
+                }
+            };
 
-         StringBuilder url_get_data = new StringBuilder(RSS_TO_JSON_API);
-         url_get_data.append(RSS_LINK);
-         loadRSSAsync.execute(url_get_data.toString());
+            StringBuilder url_get_data = new StringBuilder(RSS_TO_JSON_API).append(RSS_LINK);
+            loadRSSAsync.execute(url_get_data.toString());
+        } else {
+            Toast.makeText(MainActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -169,8 +173,6 @@ public class MainActivity extends AppCompatActivity
             model.setTimestamp(data.getStringExtra("date"));
 
             bodyStatsOperations.addNewBodyStat(model);
-//            mAdapter.swapCursor(bodyStatsOperations.getAllBodyStats());
-
             updateUserInfo();
         }
 
@@ -180,8 +182,6 @@ public class MainActivity extends AppCompatActivity
             String addDate = data.getStringExtra("addDate");
 
             bodyStatsOperations.addNewBodyStat(addHeight, addWeight, addDate);
-
-//            mAdapter.swapCursor(bodyStatsOperations.getAllBodyStats());
         }
     }
 
@@ -211,7 +211,6 @@ public class MainActivity extends AppCompatActivity
                         preferences.getString("gender", "gender"),
                         preferences.getString("birthDay", "birthDay")
                 )));
-
     }
 
     @Override
