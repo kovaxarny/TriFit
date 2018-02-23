@@ -18,7 +18,7 @@ import com.kovaxarny.trifit.rss.RSSObject;
  */
 
 
-public class RSSFeedAdapter extends RecyclerView.Adapter<RSSFeedAdapter.FeedViewHolder>{
+public class RSSFeedAdapter extends RecyclerView.Adapter<RSSFeedAdapter.FeedViewHolder> {
 
     private RSSObject rssObject;
     private Context mContext;
@@ -32,7 +32,7 @@ public class RSSFeedAdapter extends RecyclerView.Adapter<RSSFeedAdapter.FeedView
 
     @Override
     public FeedViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = inflater.inflate(R.layout.rss_row_item,parent,false);
+        View itemView = inflater.inflate(R.layout.rss_row_item, parent, false);
         return new FeedViewHolder(itemView);
     }
 
@@ -45,7 +45,7 @@ public class RSSFeedAdapter extends RecyclerView.Adapter<RSSFeedAdapter.FeedView
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
-                if (!isLongClick){
+                if (!isLongClick) {
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(rssObject.getItems().get(position).getLink()));
                     browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     mContext.startActivity(browserIntent);
@@ -56,16 +56,14 @@ public class RSSFeedAdapter extends RecyclerView.Adapter<RSSFeedAdapter.FeedView
 
     @Override
     public int getItemCount() {
-        if (rssObject != null){
+        if (rssObject != null) {
             return rssObject.items.size();
-        }
-        else{
+        } else {
             return 0;
         }
-
     }
 
-    class FeedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener{
+    class FeedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         public TextView tvTitle;
         public TextView tvPubDate;

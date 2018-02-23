@@ -23,7 +23,7 @@ public class AddBodyStatActivity extends AppCompatActivity {
     private EditText etAddDate;
     private Button addButton;
 
-    private int year_x,month_x,day_x;
+    private int year_x, month_x, day_x;
     static final int DIALOG_ID = 0;
     private final Calendar calendar = Calendar.getInstance();
 
@@ -54,19 +54,19 @@ public class AddBodyStatActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Intent output = new Intent();
-            if (!etAddHeight.getText().toString().equals("") && !etAddWeight.getText().toString().equals("") && !etAddDate.getText().toString().equals("")){
+            if (!etAddHeight.getText().toString().equals("") && !etAddWeight.getText().toString().equals("") && !etAddDate.getText().toString().equals("")) {
                 output.putExtra("addHeight", Integer.parseInt(etAddHeight.getText().toString()));
                 output.putExtra("addWeight", Double.parseDouble(etAddWeight.getText().toString()));
                 output.putExtra("addDate", etAddDate.getText().toString());
                 setResult(RESULT_OK, output);
                 finish();
-            }else{
+            } else {
                 Log.d(TAG, "Add pressed");
             }
         }
     };
 
-    private void showDialogOnEditTextClick(){
+    private void showDialogOnEditTextClick() {
         etAddDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,9 +76,9 @@ public class AddBodyStatActivity extends AppCompatActivity {
     }
 
     @Override
-    protected Dialog onCreateDialog(int id){
+    protected Dialog onCreateDialog(int id) {
         if (id == DIALOG_ID)
-            return new DatePickerDialog(this, datePickerListener, year_x ,month_x ,day_x);
+            return new DatePickerDialog(this, datePickerListener, year_x, month_x, day_x);
         else
             return null;
     }
@@ -93,7 +93,7 @@ public class AddBodyStatActivity extends AppCompatActivity {
         }
     };
 
-    private void updateEditText(){
+    private void updateEditText() {
         String myFormat = "yyyy-MM-dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 

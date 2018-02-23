@@ -18,7 +18,7 @@ import java.util.Locale;
  * Created by kovax on 2018-02-11.
  */
 
-public class StatsListAdapter extends RecyclerView.Adapter<StatsListAdapter.StatsViewHolder>{
+public class StatsListAdapter extends RecyclerView.Adapter<StatsListAdapter.StatsViewHolder> {
 
     private Context mContext;
     private Cursor mCursor;
@@ -40,13 +40,13 @@ public class StatsListAdapter extends RecyclerView.Adapter<StatsListAdapter.Stat
         if (!mCursor.moveToPosition(position))
             return;
 
-        BodyStatsModel bodyStat= new BodyStatsModel();
+        BodyStatsModel bodyStat = new BodyStatsModel();
         bodyStat.setHeight(mCursor.getInt(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry.COLUMN_HEIGHT)));
         bodyStat.setWeight(mCursor.getDouble(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry.COLUMN_WEIGHT)));
         bodyStat.setTimestamp(mCursor.getString(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry.COLUMN_TIMESTAMP)));
 
-        holder.heightTextView.setText(String.format(Locale.US,"%d",bodyStat.getHeight()));
-        holder.weightTextView.setText(String.format(Locale.US,"%.2f",bodyStat.getWeight()));
+        holder.heightTextView.setText(String.format(Locale.US, "%d", bodyStat.getHeight()));
+        holder.weightTextView.setText(String.format(Locale.US, "%.2f", bodyStat.getWeight()));
         holder.timeStampTextView.setText(bodyStat.getTimestamp());
     }
 
@@ -69,11 +69,9 @@ public class StatsListAdapter extends RecyclerView.Adapter<StatsListAdapter.Stat
     }
 
     public void swapCursor(Cursor newCursor) {
-        // Always close the previous mCursor first
         if (mCursor != null) mCursor.close();
         mCursor = newCursor;
         if (newCursor != null) {
-            // Force the RecyclerView to refresh
             this.notifyDataSetChanged();
         }
     }

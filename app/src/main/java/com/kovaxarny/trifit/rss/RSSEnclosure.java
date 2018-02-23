@@ -4,8 +4,7 @@ package com.kovaxarny.trifit.rss;
  * Created by kovax on 2018-02-20.
  */
 
-public class RSSEnclosure
-{
+public class RSSEnclosure {
     public String link;
 
     public RSSEnclosure(String link) {

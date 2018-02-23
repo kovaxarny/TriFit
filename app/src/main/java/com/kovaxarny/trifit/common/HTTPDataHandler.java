@@ -19,17 +19,17 @@ public class HTTPDataHandler {
     public HTTPDataHandler() {
     }
 
-    public String GetHTTPData(String urlString){
-        try{
+    public String GetHTTPData(String urlString) {
+        try {
             URL url = new URL(urlString);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
-            if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK){
+            if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 InputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                 StringBuilder stringBuilder = new StringBuilder();
                 String line;
-                while((line = bufferedReader.readLine()) != null){
+                while ((line = bufferedReader.readLine()) != null) {
                     stringBuilder.append(line);
                 }
                 stream = stringBuilder.toString();
@@ -39,7 +39,7 @@ public class HTTPDataHandler {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (SecurityException e){
+        } catch (SecurityException e) {
             e.printStackTrace();
         }
         return stream;

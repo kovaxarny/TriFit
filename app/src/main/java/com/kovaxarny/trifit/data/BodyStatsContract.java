@@ -8,7 +8,7 @@ import android.provider.BaseColumns;
 
 public class BodyStatsContract {
 
-    public static final class BodyStatsEntry implements BaseColumns{
+    public static final class BodyStatsEntry implements BaseColumns {
         public static final String TABLE_NAME = "bodystats";
         public static final String COLUMN_HEIGHT = "height";
         public static final String COLUMN_WEIGHT = "weight";

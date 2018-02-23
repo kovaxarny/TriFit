@@ -17,7 +17,7 @@ public class BodyStatsOperations {
         this.mDb = dbHelper.getWritableDatabase();
     }
 
-    public Cursor getAllBodyStats(){
+    public Cursor getAllBodyStats() {
         return mDb.query(
                 BodyStatsContract.BodyStatsEntry.TABLE_NAME,
                 null,
@@ -29,7 +29,7 @@ public class BodyStatsOperations {
         );
     }
 
-    public long addNewBodyStat (Integer height, Double weight, String stringDate){
+    public long addNewBodyStat(Integer height, Double weight, String stringDate) {
         ContentValues cv = new ContentValues();
 
         cv.put(BodyStatsContract.BodyStatsEntry.COLUMN_HEIGHT, height);
@@ -39,7 +39,7 @@ public class BodyStatsOperations {
         return mDb.insert(BodyStatsContract.BodyStatsEntry.TABLE_NAME, null, cv);
     }
 
-    public long addNewBodyStat (BodyStatsModel model){
+    public long addNewBodyStat(BodyStatsModel model) {
         ContentValues cv = new ContentValues();
 
         cv.put(BodyStatsContract.BodyStatsEntry.COLUMN_HEIGHT, model.getHeight());
@@ -49,11 +49,11 @@ public class BodyStatsOperations {
         return mDb.insert(BodyStatsContract.BodyStatsEntry.TABLE_NAME, null, cv);
     }
 
-    public void deleteData(){
-        mDb.delete(BodyStatsContract.BodyStatsEntry.TABLE_NAME,null,null);
+    public void deleteData() {
+        mDb.delete(BodyStatsContract.BodyStatsEntry.TABLE_NAME, null, null);
     }
 
-    public BodyStatsModel getLatestData(){
+    public BodyStatsModel getLatestData() {
         BodyStatsModel stats = new BodyStatsModel();
 
         Cursor mCursor = mDb.query(
@@ -67,18 +67,16 @@ public class BodyStatsOperations {
                 "1"
         );
 
-        if (mCursor.moveToFirst())
-        {
+        if (mCursor.moveToFirst()) {
             do {
                 stats.setHeight(mCursor.getInt(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry.COLUMN_HEIGHT)));
                 stats.setWeight(mCursor.getDouble(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry.COLUMN_WEIGHT)));
                 stats.setTimestamp(mCursor.getString(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry.COLUMN_TIMESTAMP)));
-            } while(mCursor.moveToNext());
+            } while (mCursor.moveToNext());
         }
 
         return stats;
     }
-
 
 
 }

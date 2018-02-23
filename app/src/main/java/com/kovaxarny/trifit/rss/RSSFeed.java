@@ -4,8 +4,7 @@ package com.kovaxarny.trifit.rss;
  * Created by kovax on 2018-02-20.
  */
 
-public class RSSFeed
-{
+public class RSSFeed {
     public String url;
     public String title;
     public String link;

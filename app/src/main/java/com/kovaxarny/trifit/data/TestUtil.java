@@ -9,8 +9,8 @@ import java.util.List;
 
 public class TestUtil {
 
-    public static void insertFakeData(SQLiteDatabase db){
-        if(db == null){
+    public static void insertFakeData(SQLiteDatabase db) {
+        if (db == null) {
             return;
         }
         //create a list of fake data
@@ -42,22 +42,18 @@ public class TestUtil {
         list.add(cv);
 
         //insert all data in one transaction
-        try
-        {
+        try {
             db.beginTransaction();
             //clear the table first
-            db.delete (BodyStatsContract.BodyStatsEntry.TABLE_NAME,null,null);
+            db.delete(BodyStatsContract.BodyStatsEntry.TABLE_NAME, null, null);
             //go through the list and add one by one
-            for(ContentValues c:list){
+            for (ContentValues c : list) {
                 db.insert(BodyStatsContract.BodyStatsEntry.TABLE_NAME, null, c);
             }
             db.setTransactionSuccessful();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             //too bad :(
-        }
-        finally
-        {
+        } finally {
             db.endTransaction();
         }
 

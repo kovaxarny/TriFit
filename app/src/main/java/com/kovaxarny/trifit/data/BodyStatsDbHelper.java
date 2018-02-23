@@ -10,7 +10,7 @@ import com.kovaxarny.trifit.data.BodyStatsContract.BodyStatsEntry;
  * Created by kovax on 2018-02-11.
  */
 
-public class BodyStatsDbHelper extends SQLiteOpenHelper{
+public class BodyStatsDbHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "basestats.db";
     public static final int DATABASE_VERSION = 1;

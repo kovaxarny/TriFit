@@ -6,8 +6,7 @@ import java.util.List;
  * Created by kovax on 2018-02-20.
  */
 
-public class RSSItem
-{
+public class RSSItem {
     public String title;
     public String pubDate;
     public String link;

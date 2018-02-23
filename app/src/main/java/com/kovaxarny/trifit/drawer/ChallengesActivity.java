@@ -23,7 +23,6 @@ public class ChallengesActivity extends AppCompatActivity {
         mDisplayText = (TextView) findViewById(R.id.tv_challenges_activity);
 
 
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

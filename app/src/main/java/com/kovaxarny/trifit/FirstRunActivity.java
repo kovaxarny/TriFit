@@ -31,7 +31,7 @@ public class FirstRunActivity extends AppCompatActivity {
 
     private Button submitButton;
 
-    private int year_x,month_x,day_x;
+    private int year_x, month_x, day_x;
     static final int DIALOG_ID = 0;
     private final Calendar calendar = Calendar.getInstance();
 
@@ -45,15 +45,15 @@ public class FirstRunActivity extends AppCompatActivity {
         day_x = calendar.get(Calendar.DAY_OF_MONTH);
 
         //TODO setting date to my birthday for faster manual testing
-        calendar.set(1996,11,4);
+        calendar.set(1996, 11, 4);
 
         birthDay = (EditText) findViewById(R.id.et_birth_date);
         updateEditText();
         showDialogOnEditTextClick();
 
         gender = (Spinner) findViewById(R.id.spinner_gender);
-        String[] genders = {"Male","Female"};
-        ArrayAdapter<String> adapter =  new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,genders);
+        String[] genders = {"Male", "Female"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, genders);
         gender.setAdapter(adapter);
 
         submitButton = (Button) findViewById(R.id.btn_submit);
@@ -66,12 +66,12 @@ public class FirstRunActivity extends AppCompatActivity {
         onSubmit();
     }
 
-    private void onSubmit(){
+    private void onSubmit() {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent output = new Intent();
-                if (firstName.length()!= 0 && lastName.length()!= 0 && birthDay.length()!= 0 && weight.length()!= 0 && height.length()!= 0){
+                if (firstName.length() != 0 && lastName.length() != 0 && birthDay.length() != 0 && weight.length() != 0 && height.length() != 0) {
                     getSharedPreferences("com.kovaxarny.trifit.Preferences", MODE_PRIVATE)
                             .edit()
                             .putBoolean("isFirstRun", false)
@@ -85,14 +85,14 @@ public class FirstRunActivity extends AppCompatActivity {
                     output.putExtra("date", formatDate(Calendar.getInstance().getTime()));
                     setResult(RESULT_OK, output);
                     finish();
-                }else{
+                } else {
                     Log.d(TAG, "Submit pressed");
                 }
             }
         });
     }
 
-    private void showDialogOnEditTextClick(){
+    private void showDialogOnEditTextClick() {
         birthDay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,9 +102,9 @@ public class FirstRunActivity extends AppCompatActivity {
     }
 
     @Override
-    protected Dialog onCreateDialog(int id){
+    protected Dialog onCreateDialog(int id) {
         if (id == DIALOG_ID)
-            return new DatePickerDialog(this, datePickerListener, year_x ,month_x ,day_x);
+            return new DatePickerDialog(this, datePickerListener, year_x, month_x, day_x);
         else
             return null;
     }
@@ -119,11 +119,11 @@ public class FirstRunActivity extends AppCompatActivity {
         }
     };
 
-    private void updateEditText(){
+    private void updateEditText() {
         birthDay.setText(formatDate(calendar.getTime()));
     }
 
-    private String formatDate(Date date){
+    private String formatDate(Date date) {
         String myFormat = "yyyy-MM-dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         return sdf.format(date);

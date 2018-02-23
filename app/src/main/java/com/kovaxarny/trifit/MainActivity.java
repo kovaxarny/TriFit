@@ -3,7 +3,6 @@ package com.kovaxarny.trifit;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -97,8 +96,8 @@ public class MainActivity extends AppCompatActivity
         preferences = getSharedPreferences("com.kovaxarny.trifit.Preferences", MODE_PRIVATE);
 
         /* Accessing the db behind the app */
-        bodyStatsOperations = new BodyStatsOperations(dbHelper);
-        Cursor cursor = bodyStatsOperations.getAllBodyStats();
+//        bodyStatsOperations = new BodyStatsOperations(dbHelper);
+//        Cursor cursor = bodyStatsOperations.getAllBodyStats();
 
         /* Showing database data on the Main Activity*/
 //        statsListRecycleView = (RecyclerView) findViewById(R.id.all_body_stats_view);

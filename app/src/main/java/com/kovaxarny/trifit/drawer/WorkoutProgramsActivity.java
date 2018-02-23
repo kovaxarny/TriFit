@@ -24,7 +24,7 @@ public class WorkoutProgramsActivity extends AppCompatActivity {
 
         Intent callerIntent = getIntent();
 
-        if (callerIntent.hasExtra("Text")){
+        if (callerIntent.hasExtra("Text")) {
             mDisplayText.setText(callerIntent.getStringExtra("Text"));
         }
 
