@@ -1,5 +1,6 @@
 package com.kovaxarny.trifit;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -37,8 +38,6 @@ import com.kovaxarny.trifit.statistics.BodyIndex;
 
 import java.util.Locale;
 
-
-//TODO fix issues, search for udemy course
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -70,7 +69,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         /* Setting up the Toolbar for our activity */
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         /* Floating action button what we will need in the future for new stat input */
@@ -118,7 +117,7 @@ public class MainActivity extends AppCompatActivity
 
     private void loadRSS() {
         if (CheckNetwork.isInternetAvailable(MainActivity.this)) {
-            AsyncTask<String, String, String> loadRSSAsync = new AsyncTask<String, String, String>() {
+            @SuppressLint("StaticFieldLeak") AsyncTask<String, String, String> loadRSSAsync = new AsyncTask<String, String, String>() {
 
                 @Override
                 protected String doInBackground(String... strings) {
@@ -272,7 +271,6 @@ public class MainActivity extends AppCompatActivity
                     .putBoolean("isFirstRun", true)
                     .apply();
             bodyStatsOperations.deleteData();
-//            mAdapter.swapCursor(bodyStatsOperations.getAllBodyStats());
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
