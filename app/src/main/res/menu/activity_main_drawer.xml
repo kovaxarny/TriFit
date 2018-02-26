@@ -6,7 +6,7 @@
 
     <group
         android:id="@+id/nav_group_top"
-        android:checkableBehavior="single">
+        android:checkableBehavior="none">
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_account_box_black_24dp"
@@ -20,7 +20,9 @@
             android:icon="@drawable/ic_timer_black_24dp"
             android:title="@string/challanges" />
     </group>
-    <group android:id="@+id/nav_group_bot">
+    <group
+        android:id="@+id/nav_group_bot"
+        android:checkableBehavior="none">
 
         <item
             android:id="@+id/nav_settings"

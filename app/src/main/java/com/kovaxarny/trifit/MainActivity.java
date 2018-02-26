@@ -59,8 +59,9 @@ public class MainActivity extends AppCompatActivity
     TextView tvUserBMR;
     BodyIndex bodyIndex = new BodyIndex();
 
-    private BodyStatsOperations bodyStatsOperations;
+
     private BodyStatsDbHelper dbHelper = new BodyStatsDbHelper(this);
+    private BodyStatsOperations bodyStatsOperations = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +97,7 @@ public class MainActivity extends AppCompatActivity
         preferences = getSharedPreferences("com.kovaxarny.trifit.Preferences", MODE_PRIVATE);
 
         /* Accessing the db behind the app */
-//        bodyStatsOperations = new BodyStatsOperations(dbHelper);
+        bodyStatsOperations = new BodyStatsOperations(dbHelper);
 //        Cursor cursor = bodyStatsOperations.getAllBodyStats();
 
         /* Showing database data on the Main Activity*/
@@ -107,7 +108,7 @@ public class MainActivity extends AppCompatActivity
 //        statsListRecycleView.setAdapter(mAdapter);
 
         /* RSS feed*/
-        rssFeedRecycleView = (RecyclerView) findViewById(R.id.all_body_stats_view);
+        rssFeedRecycleView = (RecyclerView) findViewById(R.id.rss_recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false);
         rssFeedRecycleView.setLayoutManager(linearLayoutManager);
 

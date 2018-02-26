@@ -8,11 +8,5 @@
     tools:context="com.kovaxarny.trifit.drawer.WorkoutProgramsActivity"
     tools:showIn="@layout/activity_workout_programs">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_workout_programs_activity"
-        android:textSize="24sp"
-        android:text="This text should change" />
 
 </android.support.constraint.ConstraintLayout>
