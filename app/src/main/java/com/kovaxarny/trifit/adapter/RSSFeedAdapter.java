@@ -32,7 +32,7 @@ public class RSSFeedAdapter extends RecyclerView.Adapter<RSSFeedAdapter.FeedView
 
     @Override
     public FeedViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = inflater.inflate(R.layout.rss_row_item, parent, false);
+        View itemView = inflater.inflate(R.layout.rss_list_item, parent, false);
         return new FeedViewHolder(itemView);
     }
 

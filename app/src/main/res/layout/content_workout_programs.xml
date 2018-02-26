@@ -8,5 +8,10 @@
     tools:context="com.kovaxarny.trifit.drawer.WorkoutProgramsActivity"
     tools:showIn="@layout/activity_workout_programs">
 
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/workout_programs_rv"/>
+
 
 </android.support.constraint.ConstraintLayout>
