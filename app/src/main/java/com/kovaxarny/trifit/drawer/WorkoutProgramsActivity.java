@@ -92,7 +92,7 @@ public class WorkoutProgramsActivity extends AppCompatActivity {
         workoutStyleModelArrayList.add(workoutStyleModel);
         //CALISTHENICS
         workoutStyleModel = new WorkoutStyleModel();
-        workoutStyleModel.setStyleName("Cardio");
+        workoutStyleModel.setStyleName("Calisthenics");
         workoutStyleModel.setStyleImage(R.drawable.workout_calisthenics);
         workoutModelArrayList = new ArrayList<>();
         //add childs to parent
