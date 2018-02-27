@@ -140,6 +140,7 @@ public class MainActivity extends AppCompatActivity
             StringBuilder url_get_data = new StringBuilder(RSS_TO_JSON_API).append(RSS_LINK);
             loadRSSAsync.execute(url_get_data.toString());
         } else {
+            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
             Toast.makeText(MainActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
         }
     }
