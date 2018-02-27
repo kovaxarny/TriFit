@@ -24,9 +24,9 @@ import com.google.gson.Gson;
 import com.kovaxarny.trifit.adapter.RSSFeedAdapter;
 import com.kovaxarny.trifit.common.CheckNetwork;
 import com.kovaxarny.trifit.common.HTTPDataHandler;
-import com.kovaxarny.trifit.data.BodyStatsDbHelper;
-import com.kovaxarny.trifit.data.BodyStatsModel;
-import com.kovaxarny.trifit.data.BodyStatsOperations;
+import com.kovaxarny.trifit.data.bodystats.BodyStatsDbHelper;
+import com.kovaxarny.trifit.data.bodystats.BodyStatsModel;
+import com.kovaxarny.trifit.data.bodystats.BodyStatsOperations;
 import com.kovaxarny.trifit.drawer.AboutActivity;
 import com.kovaxarny.trifit.drawer.ChallengesActivity;
 import com.kovaxarny.trifit.drawer.ProfileActivity;
@@ -251,7 +251,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(startProfileActivityIntent);
         } else if (id == R.id.nav_workout_programs) {
             Intent startWorkoutProgramsActivityIntent = new Intent(MainActivity.this, WorkoutProgramsActivity.class);
-            startWorkoutProgramsActivityIntent.putExtra("Text", "Drawer > Workout Programs: " + id);
+            startWorkoutProgramsActivityIntent.putExtra("Text", "Drawer > WorkoutModel Programs: " + id);
             startActivity(startWorkoutProgramsActivityIntent);
         } else if (id == R.id.nav_challanges) {
             Intent startChallengesActivityIntent = new Intent(MainActivity.this, ChallengesActivity.class);

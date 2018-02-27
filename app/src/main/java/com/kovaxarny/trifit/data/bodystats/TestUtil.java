@@ -1,4 +1,4 @@
-package com.kovaxarny.trifit.data;
+package com.kovaxarny.trifit.data.bodystats;
 
 import android.content.ContentValues;
 import android.database.SQLException;

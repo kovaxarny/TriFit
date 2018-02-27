@@ -1,4 +1,4 @@
-package com.kovaxarny.trifit.data;
+package com.kovaxarny.trifit.data.bodystats;
 
 import android.provider.BaseColumns;
 

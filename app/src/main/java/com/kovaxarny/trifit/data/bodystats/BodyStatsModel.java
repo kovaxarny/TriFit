@@ -1,4 +1,4 @@
-package com.kovaxarny.trifit.data;
+package com.kovaxarny.trifit.data.bodystats;
 
 /**
  * Created by kovax on 2018-02-13.

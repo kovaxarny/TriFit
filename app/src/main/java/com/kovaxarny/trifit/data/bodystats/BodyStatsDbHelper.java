@@ -1,10 +1,10 @@
-package com.kovaxarny.trifit.data;
+package com.kovaxarny.trifit.data.bodystats;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.kovaxarny.trifit.data.BodyStatsContract.BodyStatsEntry;
+import com.kovaxarny.trifit.data.bodystats.BodyStatsContract.BodyStatsEntry;
 
 /**
  * Created by kovax on 2018-02-11.

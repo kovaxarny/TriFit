@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.kovaxarny.trifit.R;
-import com.kovaxarny.trifit.data.BodyStatsContract;
-import com.kovaxarny.trifit.data.BodyStatsModel;
+import com.kovaxarny.trifit.data.bodystats.BodyStatsContract;
+import com.kovaxarny.trifit.data.bodystats.BodyStatsModel;
 
 import java.util.Locale;
 

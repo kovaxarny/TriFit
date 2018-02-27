@@ -2,7 +2,7 @@ package com.kovaxarny.trifit;
 
 import android.provider.BaseColumns;
 
-import com.kovaxarny.trifit.data.BodyStatsContract;
+import com.kovaxarny.trifit.data.bodystats.BodyStatsContract;
 
 import org.junit.Test;
 
