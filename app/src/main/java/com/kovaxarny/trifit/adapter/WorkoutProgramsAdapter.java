@@ -96,6 +96,7 @@ public class WorkoutProgramsAdapter extends RecyclerView.Adapter<WorkoutPrograms
             context = itemView.getContext();
             wpTitle = (TextView) itemView.findViewById(R.id.tv_wp_title);
             wpImage = (ImageView) itemView.findViewById(R.id.iv_wp_image);
+
             linearLayout_ChildItems = (LinearLayout) itemView.findViewById(R.id.ll_child_items);
             linearLayout_ChildItems.setVisibility(View.GONE);
 

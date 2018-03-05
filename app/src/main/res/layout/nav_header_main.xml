@@ -21,13 +21,14 @@
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="User Name"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="18sp" />
+        android:textColor="@color/accent" />
 
     <TextView
         android:id="@+id/tv_birth_day"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="BirthDate" />
+        android:text="BirthDate"
+        android:textColor="@color/accent" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,14 +41,16 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical|center_horizontal"
-            android:text="@string/bmi" />
+            android:text="@string/bmi"
+            android:textColor="@color/accent" />
 
         <TextView
             android:id="@+id/tv_bmi"
             android:layout_width="70dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:gravity="center" />
+            android:gravity="center"
+            android:textColor="@color/accent" />
 
         <Space
             android:layout_width="38dp"
@@ -60,14 +63,16 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/bmr" />
+            android:text="@string/bmr"
+            android:textColor="@color/accent" />
 
         <TextView
             android:id="@+id/tv_bmr"
             android:layout_width="70dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:gravity="center" />
+            android:gravity="center"
+            android:textColor="@color/accent" />
     </LinearLayout>
 
 </LinearLayout>

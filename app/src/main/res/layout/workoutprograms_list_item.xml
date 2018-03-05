@@ -22,9 +22,10 @@
             android:id="@+id/tv_wp_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
             android:gravity="center"
             android:text="Title"
-            android:layout_marginBottom="4dp"
+            android:textColor="@color/primary_dark"
             android:textSize="22sp"
             android:textStyle="bold" />
 
