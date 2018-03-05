@@ -94,6 +94,37 @@ public class WorkoutProgramsActivity extends AppCompatActivity {
         //1st child
         workoutModel = new WorkoutModel();
         workoutModel.setWorkoutName("Chest");
+        workoutModel.setWorkoutImage(R.drawable.gym_chest);
+        workoutModelArrayList.add(workoutModel);
+        //2nd child
+        workoutModel = new WorkoutModel();
+        workoutModel.setWorkoutName("Biceps");
+        workoutModel.setWorkoutImage(R.drawable.gym_biceps);
+        workoutModelArrayList.add(workoutModel);
+        //3rd child
+        workoutModel = new WorkoutModel();
+        workoutModel.setWorkoutName("Triceps");
+        workoutModel.setWorkoutImage(R.drawable.gym_triceps);
+        workoutModelArrayList.add(workoutModel);
+        //4th child
+        workoutModel = new WorkoutModel();
+        workoutModel.setWorkoutName("Shoulder");
+        workoutModel.setWorkoutImage(R.drawable.gym_shoulders);
+        workoutModelArrayList.add(workoutModel);
+        //5th child
+        workoutModel = new WorkoutModel();
+        workoutModel.setWorkoutName("Back");
+        workoutModel.setWorkoutImage(R.drawable.gym_back);
+        workoutModelArrayList.add(workoutModel);
+        //6th child
+        workoutModel = new WorkoutModel();
+        workoutModel.setWorkoutName("Abs");
+        workoutModel.setWorkoutImage(R.drawable.gym_abs);
+        workoutModelArrayList.add(workoutModel);
+        //7th child
+        workoutModel = new WorkoutModel();
+        workoutModel.setWorkoutName("Legs");
+        workoutModel.setWorkoutImage(R.drawable.gym_legs);
         workoutModelArrayList.add(workoutModel);
         //add childs to parent
         workoutStyleModel.setWorkoutModelItems(workoutModelArrayList);
@@ -103,6 +134,16 @@ public class WorkoutProgramsActivity extends AppCompatActivity {
         workoutStyleModel.setStyleName("Calisthenics");
         workoutStyleModel.setStyleImage(R.drawable.workout_calisthenics);
         workoutModelArrayList = new ArrayList<>();
+        //1st child
+        workoutModel = new WorkoutModel();
+        workoutModel.setWorkoutName("Push");
+        workoutModel.setWorkoutImage(R.drawable.calisthenics_push);
+        workoutModelArrayList.add(workoutModel);
+        //2nd child
+        workoutModel = new WorkoutModel();
+        workoutModel.setWorkoutName("Pull");
+        workoutModel.setWorkoutImage(R.drawable.calisthenics_pull);
+        workoutModelArrayList.add(workoutModel);
         //add childs to parent
         workoutStyleModel.setWorkoutModelItems(workoutModelArrayList);
         workoutStyleModelArrayList.add(workoutStyleModel);
