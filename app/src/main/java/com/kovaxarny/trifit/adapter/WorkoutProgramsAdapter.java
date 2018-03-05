@@ -1,7 +1,6 @@
 package com.kovaxarny.trifit.adapter;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -25,9 +24,6 @@ import java.util.ArrayList;
 public class WorkoutProgramsAdapter extends RecyclerView.Adapter<WorkoutProgramsAdapter.WorkoutProgramsViewHolder> {
 
     private Context mContext;
-
-//    private int[] imageArray;
-//    private String[] titleArray;
 
     private ArrayList<WorkoutStyleModel> workoutStyleModelArrayList;
 
@@ -55,19 +51,23 @@ public class WorkoutProgramsAdapter extends RecyclerView.Adapter<WorkoutPrograms
         int noOfChild = workoutStyleModel.getWorkoutModelItems().size();
         if (noOfChild < noOfChildTextViews) {
             for (int index = noOfChild; index < noOfChildTextViews; index++) {
-                TextView currentTextView = (TextView) holder.linearLayout_ChildItems.getChildAt(index);
-                currentTextView.setVisibility(View.GONE);
+                LinearLayout currentLinearLayout = (LinearLayout) holder.linearLayout_ChildItems.getChildAt(index);
+                currentLinearLayout.setVisibility(View.GONE);
             }
         }
         for (int textViewIndex = 0; textViewIndex < noOfChild; textViewIndex++) {
-            TextView currentTextView = (TextView) holder.linearLayout_ChildItems.getChildAt(textViewIndex);
-            currentTextView.setText(workoutStyleModel.getWorkoutModelItems().get(textViewIndex).getWorkoutName());
-                /*currentTextView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(mContext, "" + ((TextView) view).getText().toString(), Toast.LENGTH_SHORT).show();
+            LinearLayout currentLinearLayout = (LinearLayout) holder.linearLayout_ChildItems.getChildAt(textViewIndex);
+            for (int index = 0; index < currentLinearLayout.getChildCount(); index++){
+                if (currentLinearLayout.getChildAt(index).getClass() == TextView.class){
+                    TextView currentTextView = (TextView) currentLinearLayout.getChildAt(index);
+                    currentTextView.setText(workoutStyleModel.getWorkoutModelItems().get(textViewIndex).getWorkoutName());
+                }else{
+                    if (currentLinearLayout.getChildAt(index).getClass() == ImageView.class){
+                        ImageView currentImageView = (ImageView) currentLinearLayout.getChildAt(index);
+                        currentImageView.setImageResource(workoutStyleModel.getWorkoutModelItems().get(textViewIndex).getWorkoutImage());
                     }
-                });*/
+                }
+            }
         }
     }
 
@@ -108,11 +108,28 @@ public class WorkoutProgramsAdapter extends RecyclerView.Adapter<WorkoutPrograms
                 TextView textView = new TextView(context);
                 textView.setId(indexView);
                 textView.setPadding(0, 20, 0, 20);
+                textView.setTextSize(18);
                 textView.setGravity(Gravity.CENTER);
-                textView.setBackground(ContextCompat.getDrawable(context, R.drawable.background_sub_module_text));
+
+                ImageView imageView = new ImageView(context);
+                imageView.setId(indexView);
+                imageView.setAdjustViewBounds(true);
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                textView.setOnClickListener(this);
-                linearLayout_ChildItems.addView(textView, layoutParams);
+
+                LinearLayout linearLayout = new LinearLayout(context);
+                linearLayout.setOrientation(LinearLayout.VERTICAL);
+                linearLayout.setOnClickListener(this);
+                linearLayout.setId(indexView);
+                linearLayout.setBackgroundResource(R.drawable.border);
+                linearLayout.setPadding(10,0,10,10);
+
+                linearLayout.addView(textView, layoutParams);
+                linearLayout.addView(imageView);
+
+                layoutParams.setMargins(20,10,20,0);
+                linearLayout_ChildItems.addView(linearLayout,layoutParams);
             }
 
             itemView.setOnClickListener(this);
@@ -127,9 +144,9 @@ public class WorkoutProgramsAdapter extends RecyclerView.Adapter<WorkoutPrograms
                     linearLayout_ChildItems.setVisibility(View.VISIBLE);
                 }
             } else {
-                TextView childTextView = (TextView) view;
-                Toast.makeText(context, "" + childTextView.getText(), Toast.LENGTH_SHORT).show();
-//                Toast.makeText(mContext,String.valueOf(view.getId()), Toast.LENGTH_SHORT).show();
+                LinearLayout childLinearLayout = (LinearLayout) view;
+                TextView currentTextView = (TextView) childLinearLayout.getChildAt(0);
+                Toast.makeText(context, "" + currentTextView.getText(), Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -66,14 +66,22 @@ public class WorkoutProgramsActivity extends AppCompatActivity {
         //1st child
         workoutModel = new WorkoutModel();
         workoutModel.setWorkoutName("Walking");
+        workoutModel.setWorkoutImage(R.drawable.cardio_walking);
         workoutModelArrayList.add(workoutModel);
         //2nd child
         workoutModel = new WorkoutModel();
         workoutModel.setWorkoutName("Running");
+        workoutModel.setWorkoutImage(R.drawable.cardio_running);
         workoutModelArrayList.add(workoutModel);
         //3rd child
         workoutModel = new WorkoutModel();
         workoutModel.setWorkoutName("Bicycle");
+        workoutModel.setWorkoutImage(R.drawable.cardio_bicycle);
+        workoutModelArrayList.add(workoutModel);
+        //4th child
+        workoutModel = new WorkoutModel();
+        workoutModel.setWorkoutName("Skipping");
+        workoutModel.setWorkoutImage(R.drawable.cardio_skipping);
         workoutModelArrayList.add(workoutModel);
         //add childs to parent
         workoutStyleModel.setWorkoutModelItems(workoutModelArrayList);
