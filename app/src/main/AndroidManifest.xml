@@ -72,8 +72,9 @@
         <activity android:name=".FirstRunActivity" />
         <activity
             android:name=".AddBodyStatActivity"
-            android:windowSoftInputMode="stateVisible"></activity>
-        <activity android:name=".exercise.ExerciseListActivity"></activity>
+            android:windowSoftInputMode="stateVisible"/>
+        <activity android:name=".exercise.ExerciseListActivity"
+            android:parentActivityName=".drawer.WorkoutProgramsActivity"/>
     </application>
 
 </manifest>
