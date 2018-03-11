@@ -54,7 +54,7 @@ public class ExerciseDatabaseTest {
         SQLiteOpenHelper dbHelper =
                 (SQLiteOpenHelper) mDbHelperClass.getConstructor(Context.class).newInstance(mContext);
 
-        /* Use BodyStatsDbHelper to get access to a writable database */
+        /* Use ExerciseDbHelper to get access to a writable database */
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
 
@@ -168,7 +168,7 @@ public class ExerciseDatabaseTest {
         SQLiteOpenHelper dbHelper =
                 (SQLiteOpenHelper) mDbHelperClass.getConstructor(Context.class).newInstance(mContext);
 
-        /* Use BodyStatsDbHelper to get access to a writable database */
+        /* Use ExerciseDbHelper to get access to a writable database */
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
         ContentValues testValues = new ContentValues();
@@ -217,7 +217,7 @@ public class ExerciseDatabaseTest {
         SQLiteOpenHelper dbHelper =
                 (SQLiteOpenHelper) mDbHelperClass.getConstructor(Context.class).newInstance(mContext);
 
-        /* Use BodyStatsDbHelper to get access to a writable database */
+        /* Use ExerciseDbHelper to get access to a writable database */
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
         ContentValues testValues = new ContentValues();
@@ -294,7 +294,7 @@ public class ExerciseDatabaseTest {
             f.setAccessible(true);
             mContext.deleteDatabase((String)f.get(null));
         }catch (NoSuchFieldException ex){
-            fail("Make sure you have a member called DATABASE_NAME in the BodyStatsDbHelper");
+            fail("Make sure you have a member called DATABASE_NAME in the ExerciseDbHelper");
         }catch (Exception ex){
             fail(ex.getMessage());
         }
