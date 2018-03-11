@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.kovaxarny.trifit.data.workout.ExerciseContract;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,38 +19,37 @@ public class TestUtil {
         List<ContentValues> list = new ArrayList<ContentValues>();
 
         ContentValues cv = new ContentValues();
-        cv.put(BodyStatsContract.BodyStatsEntry.COLUMN_HEIGHT, 170);
-        cv.put(BodyStatsContract.BodyStatsEntry.COLUMN_WEIGHT, 75);
+        cv.put(ExerciseContract.ExerciseEntry.COLUMN_NAME, "Push Up");
+        cv.put(ExerciseContract.ExerciseEntry.COLUMN_TYPE, "Calisthenics");
+        cv.put(ExerciseContract.ExerciseEntry.COLUMN_MUSCLE, "Chest");
+        cv.put(ExerciseContract.ExerciseEntry.COLUMN_DESCRIPTION, "Description");
+        cv.put(ExerciseContract.ExerciseEntry.COLUMN_EQUIPMENT, "None");
         list.add(cv);
 
         cv = new ContentValues();
-        cv.put(BodyStatsContract.BodyStatsEntry.COLUMN_HEIGHT, 170);
-        cv.put(BodyStatsContract.BodyStatsEntry.COLUMN_WEIGHT, 74);
+        cv.put(ExerciseContract.ExerciseEntry.COLUMN_NAME, "Pull Up");
+        cv.put(ExerciseContract.ExerciseEntry.COLUMN_TYPE, "Calisthenics");
+        cv.put(ExerciseContract.ExerciseEntry.COLUMN_MUSCLE, "Back");
+        cv.put(ExerciseContract.ExerciseEntry.COLUMN_DESCRIPTION, "Description");
+        cv.put(ExerciseContract.ExerciseEntry.COLUMN_EQUIPMENT, "None");
         list.add(cv);
 
         cv = new ContentValues();
-        cv.put(BodyStatsContract.BodyStatsEntry.COLUMN_HEIGHT, 170);
-        cv.put(BodyStatsContract.BodyStatsEntry.COLUMN_WEIGHT, 73.5);
-        list.add(cv);
-
-        cv = new ContentValues();
-        cv.put(BodyStatsContract.BodyStatsEntry.COLUMN_HEIGHT, 170);
-        cv.put(BodyStatsContract.BodyStatsEntry.COLUMN_WEIGHT, 72);
-        list.add(cv);
-
-        cv = new ContentValues();
-        cv.put(BodyStatsContract.BodyStatsEntry.COLUMN_HEIGHT, 171);
-        cv.put(BodyStatsContract.BodyStatsEntry.COLUMN_WEIGHT, 71.0);
+        cv.put(ExerciseContract.ExerciseEntry.COLUMN_NAME, "Sit Up");
+        cv.put(ExerciseContract.ExerciseEntry.COLUMN_TYPE, "Calisthenics");
+        cv.put(ExerciseContract.ExerciseEntry.COLUMN_MUSCLE, "Abs");
+        cv.put(ExerciseContract.ExerciseEntry.COLUMN_DESCRIPTION, "Description");
+        cv.put(ExerciseContract.ExerciseEntry.COLUMN_EQUIPMENT, "None");
         list.add(cv);
 
         //insert all data in one transaction
         try {
             db.beginTransaction();
             //clear the table first
-            db.delete(BodyStatsContract.BodyStatsEntry.TABLE_NAME, null, null);
+            db.delete(ExerciseContract.ExerciseEntry.TABLE_NAME, null, null);
             //go through the list and add one by one
             for (ContentValues c : list) {
-                db.insert(BodyStatsContract.BodyStatsEntry.TABLE_NAME, null, c);
+                db.insert(ExerciseContract.ExerciseEntry.TABLE_NAME, null, c);
             }
             db.setTransactionSuccessful();
         } catch (SQLException e) {
