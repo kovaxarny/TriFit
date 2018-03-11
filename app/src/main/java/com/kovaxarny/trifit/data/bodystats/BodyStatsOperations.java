@@ -69,14 +69,13 @@ public class BodyStatsOperations {
 
         if (mCursor.moveToFirst()) {
             do {
+                stats.set_id(mCursor.getInt(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry._ID)));
                 stats.setHeight(mCursor.getInt(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry.COLUMN_HEIGHT)));
                 stats.setWeight(mCursor.getDouble(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry.COLUMN_WEIGHT)));
                 stats.setTimestamp(mCursor.getString(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry.COLUMN_TIMESTAMP)));
             } while (mCursor.moveToNext());
         }
 
-        return stats;
+        return stats.get_id() != null ? stats : null;
     }
-
-
 }

@@ -6,14 +6,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
 
-import com.kovaxarny.trifit.data.bodystats.BodyStatsContract;
-import com.kovaxarny.trifit.data.bodystats.BodyStatsDbHelper;
+import com.kovaxarny.trifit.data.workout.ExerciseContract;
+import com.kovaxarny.trifit.data.workout.ExerciseDbHelper;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import java.lang.reflect.Field;
 
@@ -24,18 +22,14 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 /**
- * Instrumentation test, which will execute on an Android device.
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
+ * Created by kovax on 2018-03-11.
  */
 
-@RunWith(AndroidJUnit4.class)
-public class DatabaseTest {
-
-    /* Context used to perform operations on the database and create WaitlistDbHelper */
+public class ExerciseDatabaseTest {
+    /* Context used to perform operations on the database and create ExerciseDbHelper */
     private final Context mContext = InstrumentationRegistry.getTargetContext();
     /* Class reference to help load the constructor on runtime */
-    private final Class mDbHelperClass = BodyStatsDbHelper.class;
+    private final Class mDbHelperClass = ExerciseDbHelper.class;
 
     /**
      * Because we annotate this method with the @Before annotation, this method will be called
@@ -73,7 +67,7 @@ public class DatabaseTest {
         /* This Cursor will contain the names of each table in our database */
         Cursor tableNameCursor = database.rawQuery(
                 "SELECT name FROM sqlite_master WHERE type='table' AND name='" +
-                        BodyStatsContract.BodyStatsEntry.TABLE_NAME + "'",
+                        ExerciseContract.ExerciseEntry.TABLE_NAME + "'",
                 null);
 
         /*
@@ -87,7 +81,7 @@ public class DatabaseTest {
 
         /* If this fails, it means that your database doesn't contain the expected table(s) */
         assertEquals("Error: Your database was created without the expected tables.",
-                BodyStatsContract.BodyStatsEntry.TABLE_NAME, tableNameCursor.getString(0));
+                ExerciseContract.ExerciseEntry.TABLE_NAME, tableNameCursor.getString(0));
 
         /* Always close a cursor when you are done with it */
         tableNameCursor.close();
@@ -105,16 +99,23 @@ public class DatabaseTest {
         SQLiteOpenHelper dbHelper =
                 (SQLiteOpenHelper) mDbHelperClass.getConstructor(Context.class).newInstance(mContext);
 
-        /* Use WaitlistDbHelper to get access to a writable database */
+        /* Use ExerciseDbHelper to get access to a writable database */
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
         ContentValues testValues = new ContentValues();
-        testValues.put(BodyStatsContract.BodyStatsEntry.COLUMN_HEIGHT, 170);
-        testValues.put(BodyStatsContract.BodyStatsEntry.COLUMN_WEIGHT, 75.5);
+        testValues.put(ExerciseContract.ExerciseEntry.COLUMN_NAME, "Push Ups");
+        testValues.put(ExerciseContract.ExerciseEntry.COLUMN_TYPE, "Calisthenics");
+        testValues.put(ExerciseContract.ExerciseEntry.COLUMN_MUSCLE, "Chest");
+        testValues.put(ExerciseContract.ExerciseEntry.COLUMN_DESCRIPTION,
+                "Lie on the floor face down and place your hands about 36 inches apart while holding your torso up at arms length.\n" +
+                "Next, lower yourself downward until your chest almost touches the floor as you inhale.\n" +
+                "Now breathe out and press your upper body back up to the starting position while squeezing your chest.\n" +
+                "After a brief pause at the top contracted position, you can begin to lower yourself downward again for as many repetitions as needed.");
+        testValues.put(ExerciseContract.ExerciseEntry.COLUMN_EQUIPMENT, "None");
 
         /* Insert ContentValues into database and get first row ID back */
         long firstRowId = database.insert(
-                BodyStatsContract.BodyStatsEntry.TABLE_NAME,
+                ExerciseContract.ExerciseEntry.TABLE_NAME,
                 null,
                 testValues);
 
@@ -127,7 +128,7 @@ public class DatabaseTest {
          */
         Cursor wCursor = database.query(
                 /* Name of table on which to perform the query */
-                BodyStatsContract.BodyStatsEntry.TABLE_NAME,
+                ExerciseContract.ExerciseEntry.TABLE_NAME,
                 /* Columns; leaving this null returns every column in the table */
                 null,
                 /* Optional specification for columns in the "where" clause above */
@@ -142,7 +143,7 @@ public class DatabaseTest {
                 null);
 
         /* Cursor.moveToFirst will return false if there are no records returned from your query */
-        String emptyQueryError = "Error: No Records returned from waitlist query";
+        String emptyQueryError = "Error: No Records returned from exercises query";
         assertTrue(emptyQueryError,
                 wCursor.moveToFirst());
 
@@ -171,18 +172,26 @@ public class DatabaseTest {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
         ContentValues testValues = new ContentValues();
-        testValues.put(BodyStatsContract.BodyStatsEntry.COLUMN_HEIGHT, 170);
-        testValues.put(BodyStatsContract.BodyStatsEntry.COLUMN_WEIGHT, 75.5);
+        testValues.put(ExerciseContract.ExerciseEntry.COLUMN_NAME, "Dumbbell Bench Press");
+        testValues.put(ExerciseContract.ExerciseEntry.COLUMN_TYPE, "Gym");
+        testValues.put(ExerciseContract.ExerciseEntry.COLUMN_MUSCLE, "Chest");
+        testValues.put(ExerciseContract.ExerciseEntry.COLUMN_DESCRIPTION,
+                "    Lie down on a flat bench with a dumbbell in each hand resting on top of your thighs. The palms of your hands will be facing each other.\n" +
+                        "    Then, using your thighs to help raise the dumbbells up, lift the dumbbells one at a time so that you can hold them in front of you at shoulder width.\n" +
+                        "    Once at shoulder width, rotate your wrists forward so that the palms of your hands are facing away from you. The dumbbells should be just to the sides of your chest, with your upper arm and forearm creating a 90 degree angle. Be sure to maintain full control of the dumbbells at all times. This will be your starting position.\n" +
+                        "    Then, as you breathe out, use your chest to push the dumbbells up. Lock your arms at the top of the lift and squeeze your chest, hold for a second and then begin coming down slowly. Tip: Ideally, lowering the weight should take about twice as long as raising it.\n" +
+                        "    Repeat the movement for the prescribed amount of repetitions of your training program.");
+        testValues.put(ExerciseContract.ExerciseEntry.COLUMN_EQUIPMENT, "Dumbbells");
 
         /* Insert ContentValues into database and get first row ID back */
         long firstRowId = database.insert(
-                BodyStatsContract.BodyStatsEntry.TABLE_NAME,
+                ExerciseContract.ExerciseEntry.TABLE_NAME,
                 null,
                 testValues);
 
         /* Insert ContentValues into database and get another row ID back */
         long secondRowId = database.insert(
-                BodyStatsContract.BodyStatsEntry.TABLE_NAME,
+                ExerciseContract.ExerciseEntry.TABLE_NAME,
                 null,
                 testValues);
 
@@ -212,18 +221,26 @@ public class DatabaseTest {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
         ContentValues testValues = new ContentValues();
-        testValues.put(BodyStatsContract.BodyStatsEntry.COLUMN_HEIGHT, 170);
-        testValues.put(BodyStatsContract.BodyStatsEntry.COLUMN_WEIGHT, 75.5);
+        testValues.put(ExerciseContract.ExerciseEntry.COLUMN_NAME, "Dumbbell Bench Press");
+        testValues.put(ExerciseContract.ExerciseEntry.COLUMN_TYPE, "Gym");
+        testValues.put(ExerciseContract.ExerciseEntry.COLUMN_MUSCLE, "Chest");
+        testValues.put(ExerciseContract.ExerciseEntry.COLUMN_DESCRIPTION,
+                "    Lie down on a flat bench with a dumbbell in each hand resting on top of your thighs. The palms of your hands will be facing each other.\n" +
+                        "    Then, using your thighs to help raise the dumbbells up, lift the dumbbells one at a time so that you can hold them in front of you at shoulder width.\n" +
+                        "    Once at shoulder width, rotate your wrists forward so that the palms of your hands are facing away from you. The dumbbells should be just to the sides of your chest, with your upper arm and forearm creating a 90 degree angle. Be sure to maintain full control of the dumbbells at all times. This will be your starting position.\n" +
+                        "    Then, as you breathe out, use your chest to push the dumbbells up. Lock your arms at the top of the lift and squeeze your chest, hold for a second and then begin coming down slowly. Tip: Ideally, lowering the weight should take about twice as long as raising it.\n" +
+                        "    Repeat the movement for the prescribed amount of repetitions of your training program.");
+        testValues.put(ExerciseContract.ExerciseEntry.COLUMN_EQUIPMENT, "Dumbbells");
 
         /* Insert ContentValues into database and get first row ID back */
         long firstRowId = database.insert(
-                BodyStatsContract.BodyStatsEntry.TABLE_NAME,
+                ExerciseContract.ExerciseEntry.TABLE_NAME,
                 null,
                 testValues);
 
         /* Insert ContentValues into database and get another row ID back */
         long secondRowId = database.insert(
-                BodyStatsContract.BodyStatsEntry.TABLE_NAME,
+                ExerciseContract.ExerciseEntry.TABLE_NAME,
                 null,
                 testValues);
 
@@ -233,7 +250,7 @@ public class DatabaseTest {
         /* This Cursor will contain the names of each table in our database */
         Cursor tableNameCursor = database.rawQuery(
                 "SELECT name FROM sqlite_master WHERE type='table' AND name='" +
-                        BodyStatsContract.BodyStatsEntry.TABLE_NAME + "'",
+                        ExerciseContract.ExerciseEntry.TABLE_NAME + "'",
                 null);
 
         assertTrue(tableNameCursor.getCount() == 1);
@@ -244,7 +261,7 @@ public class DatabaseTest {
          */
         Cursor wCursor = database.query(
                 /* Name of table on which to perform the query */
-                BodyStatsContract.BodyStatsEntry.TABLE_NAME,
+                ExerciseContract.ExerciseEntry.TABLE_NAME,
                 /* Columns; leaving this null returns every column in the table */
                 null,
                 /* Optional specification for columns in the "where" clause above */

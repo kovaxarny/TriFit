@@ -198,19 +198,28 @@ public class MainActivity extends AppCompatActivity
         tvUserName.setText(result);
         tvUserBirthDate.setText(preferences.getString("birthDay", "birthDay"));
 
-        BodyStatsModel model = new BodyStatsModel(bodyStatsOperations.getLatestData());
-        tvUserBMI.setText(String.format(Locale.US, "%.2f",
-                bodyIndex.calculateBodyMassIndex(
-                        model.getHeight(),
-                        model.getWeight()
-                )));
-        tvUserBMR.setText(String.format(Locale.US, "%d",
-                bodyIndex.calculateBasalMetabolicRate(
-                        model.getHeight(),
-                        model.getWeight(),
-                        preferences.getString("gender", "gender"),
-                        preferences.getString("birthDay", "birthDay")
-                )));
+        BodyStatsModel model = bodyStatsOperations.getLatestData();
+        if (model != null){
+            tvUserBMI.setText(String.format(Locale.US, "%.2f",
+                    bodyIndex.calculateBodyMassIndex(
+                            model.getHeight(),
+                            model.getWeight()
+                    )));
+            tvUserBMR.setText(String.format(Locale.US, "%d",
+                    bodyIndex.calculateBasalMetabolicRate(
+                            model.getHeight(),
+                            model.getWeight(),
+                            preferences.getString("gender", "gender"),
+                            preferences.getString("birthDay", "birthDay")
+                    )));
+        }else{
+            getSharedPreferences("com.kovaxarny.trifit.Preferences", MODE_PRIVATE)
+                    .edit()
+                    .putBoolean("isFirstRun", true)
+                    .apply();
+            onResume();
+        }
+
     }
 
     @Override
