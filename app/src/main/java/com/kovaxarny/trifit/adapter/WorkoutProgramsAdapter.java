@@ -1,6 +1,7 @@
 package com.kovaxarny.trifit.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.kovaxarny.trifit.R;
 import com.kovaxarny.trifit.data.workout.WorkoutStyleModel;
+import com.kovaxarny.trifit.exercise.ExerciseListActivity;
 import com.kovaxarny.trifit.rss.ItemClickListener;
 
 import java.util.ArrayList;
@@ -148,6 +150,9 @@ public class WorkoutProgramsAdapter extends RecyclerView.Adapter<WorkoutPrograms
                 LinearLayout childLinearLayout = (LinearLayout) view;
                 TextView currentTextView = (TextView) childLinearLayout.getChildAt(0);
                 Toast.makeText(context, "" + currentTextView.getText(), Toast.LENGTH_SHORT).show();
+                Intent startProfileActivityIntent = new Intent(context, ExerciseListActivity.class);
+                startProfileActivityIntent.putExtra("Exercise ", currentTextView.getText());
+                context.startActivity(startProfileActivityIntent);
             }
         }
     }
