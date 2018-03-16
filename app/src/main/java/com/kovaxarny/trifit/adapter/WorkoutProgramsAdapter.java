@@ -146,7 +146,7 @@ public class WorkoutProgramsAdapter extends RecyclerView.Adapter<WorkoutPrograms
                 TextView currentTextView = (TextView) childLinearLayout.getChildAt(0);
                 Toast.makeText(context, "" + currentTextView.getText(), Toast.LENGTH_SHORT).show();
                 Intent startProfileActivityIntent = new Intent(context, ExerciseListActivity.class);
-                startProfileActivityIntent.putExtra("Exercise ", currentTextView.getText());
+                startProfileActivityIntent.putExtra("muscle", currentTextView.getText());
                 context.startActivity(startProfileActivityIntent);
             }
         }

@@ -16,6 +16,22 @@ public class ExerciseOperations {
         this.mDb = dbHelper.getWritableDatabase();
     }
 
+    public Cursor getExerciseByMuscle(String muscle){
+        String whereClause = ExerciseContract.ExerciseEntry.COLUMN_MUSCLE + " = ?";
+        String[] whereArgs = new String[] {
+                muscle
+        };
+        return mDb.query(
+                ExerciseContract.ExerciseEntry.TABLE_NAME,
+                null,
+                whereClause,
+                whereArgs,
+                null,
+                null,
+                null
+        );
+    }
+
     public Cursor getAllExercise() {
         return mDb.query(
                 ExerciseContract.ExerciseEntry.TABLE_NAME,

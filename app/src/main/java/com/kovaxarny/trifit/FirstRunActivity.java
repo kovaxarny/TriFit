@@ -13,6 +13,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.kovaxarny.trifit.data.workout.ExerciseDbHelper;
+import com.kovaxarny.trifit.utilities.TestUtil;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -35,10 +38,14 @@ public class FirstRunActivity extends AppCompatActivity {
     private static final int DIALOG_ID = 0;
     private final Calendar calendar = Calendar.getInstance();
 
+    private ExerciseDbHelper dbHelper = new ExerciseDbHelper(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_start);
+
+        TestUtil.insertFakeData(dbHelper.getWritableDatabase());
 
         year_x = calendar.get(Calendar.YEAR);
         month_x = calendar.get(Calendar.MONTH);
