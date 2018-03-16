@@ -32,7 +32,7 @@ public class FirstRunActivity extends AppCompatActivity {
     private Button submitButton;
 
     private int year_x, month_x, day_x;
-    static final int DIALOG_ID = 0;
+    private static final int DIALOG_ID = 0;
     private final Calendar calendar = Calendar.getInstance();
 
     @Override

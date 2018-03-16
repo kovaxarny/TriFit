@@ -8,17 +8,16 @@ import android.support.v7.widget.RecyclerView;
 
 import com.kovaxarny.trifit.R;
 import com.kovaxarny.trifit.adapter.ExerciseListAdapter;
-import com.kovaxarny.trifit.data.bodystats.TestUtil;
+import com.kovaxarny.trifit.utilities.TestUtil;
 import com.kovaxarny.trifit.data.workout.ExerciseDbHelper;
 import com.kovaxarny.trifit.data.workout.ExerciseOperations;
 
 public class ExerciseListActivity extends AppCompatActivity {
 
-    RecyclerView exerciseListRecycleView;
-    ExerciseListAdapter exerciseListAdapter;
+    private RecyclerView exerciseListRecycleView;
+    private ExerciseListAdapter exerciseListAdapter;
 
     private ExerciseDbHelper dbHelper = new ExerciseDbHelper(this);
-    private ExerciseOperations exerciseOperations = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +26,7 @@ public class ExerciseListActivity extends AppCompatActivity {
 
         TestUtil.insertFakeData(dbHelper.getWritableDatabase());
 
-        exerciseOperations = new ExerciseOperations(dbHelper);
+        ExerciseOperations exerciseOperations = new ExerciseOperations(dbHelper);
         Cursor cursor = exerciseOperations.getAllExercise();
 
         exerciseListRecycleView = (RecyclerView) findViewById(R.id.exercise_list_rv);

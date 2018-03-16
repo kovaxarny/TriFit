@@ -24,7 +24,7 @@ public class WorkoutProgramsActivity extends AppCompatActivity {
     String[] titles = {"Cardio", "Gym WorkoutModel", "Calisthenics"};
     int[] images = {R.drawable.workout_running,R.drawable.workout_gym,R.drawable.workout_calisthenics};
 
-    RecyclerView workoutProgramsRecycleView;
+    private RecyclerView workoutProgramsRecycleView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

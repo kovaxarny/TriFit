@@ -34,7 +34,7 @@
             android:title="@string/about" />
         <item
             android:id="@+id/nav_reset"
-            android:title="Reset"
+            android:title="@string/reset"
             android:icon="@android:drawable/ic_menu_revert" />
 
     </group>

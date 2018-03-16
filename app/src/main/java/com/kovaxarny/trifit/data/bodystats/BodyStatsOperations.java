@@ -76,6 +76,8 @@ public class BodyStatsOperations {
             } while (mCursor.moveToNext());
         }
 
+        mCursor.close();
+
         return stats.get_id() != null ? stats : null;
     }
 }

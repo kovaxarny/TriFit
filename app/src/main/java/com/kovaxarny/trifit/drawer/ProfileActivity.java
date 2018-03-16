@@ -10,14 +10,12 @@ import com.kovaxarny.trifit.R;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private TextView mDisplayText;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        mDisplayText = (TextView) findViewById(R.id.tv_profile_activity);
+        TextView mDisplayText = (TextView) findViewById(R.id.tv_profile_activity);
 
         Intent callerIntent = getIntent();
 

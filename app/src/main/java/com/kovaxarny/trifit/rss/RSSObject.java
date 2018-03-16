@@ -6,8 +6,8 @@ import java.util.List;
  * Created by kovax on 2018-02-20.
  */
 public class RSSObject {
-    public String status;
-    public RSSFeed feed;
+    private String status;
+    private RSSFeed feed;
     public List<RSSItem> items;
 
     public RSSObject(String status, RSSFeed feed, List<RSSItem> items) {

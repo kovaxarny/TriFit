@@ -7,16 +7,16 @@ import java.util.List;
  */
 
 public class RSSItem {
-    public String title;
-    public String pubDate;
-    public String link;
-    public String guid;
-    public String author;
-    public String thumbnail;
-    public String description;
-    public String content;
-    public RSSEnclosure enclosure;
-    public List<String> categories;
+    private String title;
+    private String pubDate;
+    private String link;
+    private String guid;
+    private String author;
+    private String thumbnail;
+    private String description;
+    private String content;
+    private RSSEnclosure enclosure;
+    private List<String> categories;
 
     public RSSItem(String title, String pubDate, String link, String guid, String author, String thumbnail, String description, String content, RSSEnclosure enclosure, List<String> categories) {
         this.title = title;

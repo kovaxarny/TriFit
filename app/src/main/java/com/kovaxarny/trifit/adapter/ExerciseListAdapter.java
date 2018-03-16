@@ -18,35 +18,35 @@ import com.kovaxarny.trifit.data.workout.ExerciseModel;
 
 public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapter.ExerciseViewHolder> {
 
-    private Context mContext;
-    private Cursor mCursor;
+    private Context context;
+    private Cursor cursor;
 
-    public ExerciseListAdapter(Context mContext, Cursor mCursor) {
-        this.mContext = mContext;
-        this.mCursor = mCursor;
+    public ExerciseListAdapter(Context context, Cursor cursor) {
+        this.context = context;
+        this.cursor = cursor;
     }
 
     @Override
     public ExerciseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(mContext);
+        LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.exercise_list_item,parent,false);
         return new ExerciseViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ExerciseViewHolder holder, int position) {
-        if (!mCursor.moveToPosition(position))
+        if (!cursor.moveToPosition(position))
             return;
 
         ExerciseModel exerciseModel = new ExerciseModel();
-        exerciseModel.setName(mCursor.getString(mCursor.getColumnIndex(ExerciseContract.ExerciseEntry.COLUMN_NAME)));
+        exerciseModel.setName(cursor.getString(cursor.getColumnIndex(ExerciseContract.ExerciseEntry.COLUMN_NAME)));
 
         holder.nameTextView.setText(exerciseModel.getName());
     }
 
     @Override
     public int getItemCount() {
-        return mCursor.getCount();
+        return cursor.getCount();
     }
 
     class ExerciseViewHolder extends RecyclerView.ViewHolder{

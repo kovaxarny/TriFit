@@ -14,7 +14,7 @@ import java.net.URL;
  */
 
 public class HTTPDataHandler {
-    static String stream = null;
+    private static String stream = null;
 
     public HTTPDataHandler() {
     }

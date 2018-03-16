@@ -21,7 +21,6 @@ public class BodyIndex {
     }
 
     public Integer calculateBasalMetabolicRate(int height, double weight, String gender, String date) {
-        Integer mBMR;
         Double bmr;
         int age = calculateAge(date);
         if (gender.equals("Male")) {
@@ -31,8 +30,7 @@ public class BodyIndex {
             //For women:  BMR = 10 × weight(kg) + 6.25 × height(cm) - 5 × age(y) - 161
             bmr = 10 * weight + 6.25 * height - 5 * age - 161;
         }
-        mBMR = bmr.intValue();
-        return mBMR;
+        return bmr.intValue();
     }
 
     private static int calculateAge(String stringBirthDate) {

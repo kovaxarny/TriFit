@@ -10,14 +10,12 @@ import com.kovaxarny.trifit.R;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private TextView mDisplayText;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        mDisplayText = (TextView) findViewById(R.id.tv_settings_activity);
+        TextView mDisplayText = (TextView) findViewById(R.id.tv_settings_activity);
 
         Intent callerIntent = getIntent();
 

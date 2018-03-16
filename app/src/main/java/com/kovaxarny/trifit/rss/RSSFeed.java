@@ -5,12 +5,12 @@ package com.kovaxarny.trifit.rss;
  */
 
 public class RSSFeed {
-    public String url;
-    public String title;
-    public String link;
-    public String author;
-    public String description;
-    public String image;
+    private String url;
+    private String title;
+    private String link;
+    private String author;
+    private String description;
+    private String image;
 
     public RSSFeed(String url, String title, String link, String author, String description, String image) {
         this.url = url;

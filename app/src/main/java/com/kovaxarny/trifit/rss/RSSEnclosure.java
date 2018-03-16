@@ -5,7 +5,7 @@ package com.kovaxarny.trifit.rss;
  */
 
 public class RSSEnclosure {
-    public String link;
+    private String link;
 
     public RSSEnclosure(String link) {
         this.link = link;

@@ -26,4 +26,11 @@
     <string name="bmi">BMI:</string>
     <string name="bmr">BMR:</string>
     <string name="date">Date</string>
+    <string name="wp_image_description">Image about the style of workout program.</string>
+    <string name="add">Add</string>
+    <string name="reset">Reset</string>
+    <string name="refresh">Refresh</string>
+    <string name="user_name">User Name</string>
+    <string name="birthdate">BirthDate</string>
+    <string name="title">Title</string>
 </resources>

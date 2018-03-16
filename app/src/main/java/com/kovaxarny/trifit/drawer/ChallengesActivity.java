@@ -10,14 +10,12 @@ import com.kovaxarny.trifit.R;
 public class ChallengesActivity extends AppCompatActivity {
 
 
-    private TextView mDisplayText;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenges);
 
-        mDisplayText = (TextView) findViewById(R.id.tv_challenges_activity);
+        TextView mDisplayText = (TextView) findViewById(R.id.tv_challenges_activity);
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

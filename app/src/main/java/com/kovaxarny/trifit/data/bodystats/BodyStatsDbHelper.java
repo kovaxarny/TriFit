@@ -12,7 +12,7 @@ import com.kovaxarny.trifit.data.bodystats.BodyStatsContract.BodyStatsEntry;
 
 public class BodyStatsDbHelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "basestats.db";
+    private static final String DATABASE_NAME = "basestats.db";
     private static final int DATABASE_VERSION = 1;
 
     public BodyStatsDbHelper(Context context) {

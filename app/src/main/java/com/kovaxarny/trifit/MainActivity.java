@@ -44,20 +44,20 @@ public class MainActivity extends AppCompatActivity
     private static final Integer firstRunActivityCode = 1;
     private static final Integer addBodyStatsActivityCode = 2;
 
-    Toolbar toolbar;
+    private Toolbar toolbar;
 
-    RecyclerView rssFeedRecycleView;
-    RSSObject rssObject;
+    private RecyclerView rssFeedRecycleView;
+    private RSSObject rssObject;
 
     private static final String RSS_LINK = "https://www.bodybuilding.com/rss/articles";
     private static final String RSS_TO_JSON_API = " https://api.rss2json.com/v1/api.json?rss_url=";
 
     private SharedPreferences preferences;
-    TextView tvUserName;
-    TextView tvUserBirthDate;
-    TextView tvUserBMI;
-    TextView tvUserBMR;
-    BodyIndex bodyIndex = new BodyIndex();
+    private TextView tvUserName;
+    private TextView tvUserBirthDate;
+    private TextView tvUserBMI;
+    private TextView tvUserBMR;
+    private BodyIndex bodyIndex = new BodyIndex();
 
 
     private BodyStatsDbHelper dbHelper = new BodyStatsDbHelper(this);

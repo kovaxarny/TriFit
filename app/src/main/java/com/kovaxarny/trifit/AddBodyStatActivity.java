@@ -21,10 +21,9 @@ public class AddBodyStatActivity extends AppCompatActivity {
     private EditText etAddHeight;
     private EditText etAddWeight;
     private EditText etAddDate;
-    private Button addButton;
 
     private int year_x, month_x, day_x;
-    static final int DIALOG_ID = 0;
+    private static final int DIALOG_ID = 0;
     private final Calendar calendar = Calendar.getInstance();
 
     @Override
@@ -35,7 +34,7 @@ public class AddBodyStatActivity extends AppCompatActivity {
         etAddHeight = (EditText) findViewById(R.id.et_add_height);
         etAddWeight = (EditText) findViewById(R.id.et_add_weight);
 
-        addButton = (Button) findViewById(R.id.add_stats_button);
+        Button addButton = (Button) findViewById(R.id.add_stats_button);
 
         addButton.setOnClickListener(addButtonListener);
 
@@ -50,7 +49,7 @@ public class AddBodyStatActivity extends AppCompatActivity {
         showDialogOnEditTextClick();
     }
 
-    View.OnClickListener addButtonListener = new View.OnClickListener() {
+    private View.OnClickListener addButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             Intent output = new Intent();
