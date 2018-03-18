@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -73,9 +73,14 @@
         <activity android:name=".FirstRunActivity" />
         <activity
             android:name=".AddBodyStatActivity"
-            android:windowSoftInputMode="stateVisible"/>
-        <activity android:name=".exercise.ExerciseListActivity"
-            android:parentActivityName=".drawer.WorkoutProgramsActivity"/>
+            android:windowSoftInputMode="stateVisible" />
+        <activity
+            android:name=".exercise.ExerciseListActivity"
+            android:parentActivityName=".drawer.WorkoutProgramsActivity" />
+        <activity android:name=".exercise.ExerciseDetailsActivity"/>
+        <service
+            android:name=".utilities.NotificationUtil$WorkoutReminderIntentService"
+            android:exported="false"/>
     </application>
 
 </manifest>
