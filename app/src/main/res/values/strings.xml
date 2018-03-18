@@ -33,4 +33,7 @@
     <string name="user_name">User Name</string>
     <string name="birthdate">BirthDate</string>
     <string name="title">Title</string>
+    <string name="about_content">The goal of this app is to help it\'s users in the beginning of a new lifestyle, where sport and happiness is a key factor.</string>
+    <string name="about_creator">This application was created by Arnold Szilveszter Kovacs.</string>
+    <string name="about_version">Current version is 1.0</string>
 </resources>
