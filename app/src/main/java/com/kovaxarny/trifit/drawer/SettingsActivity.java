@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.TextView;
 
 import com.kovaxarny.trifit.R;
+import com.kovaxarny.trifit.utilities.NotificationUtil;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -29,4 +31,7 @@ public class SettingsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    public void testNotification(View view) {
+        NotificationUtil.remindUserToWorkout(this);
+    }
 }

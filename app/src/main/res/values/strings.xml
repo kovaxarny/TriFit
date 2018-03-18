@@ -36,4 +36,7 @@
     <string name="about_content">The goal of this app is to help it\'s users in the beginning of a new lifestyle, where sport and happiness is a key factor.</string>
     <string name="about_creator">This application was created by Arnold Szilveszter Kovacs.</string>
     <string name="about_version">Current version is 1.0</string>
+    <string name="main_notification_channel_name">main_notification_channel_name</string>
+    <string name="workout_reminder_notification_title">Time to workout!</string>
+    <string name="workout_reminder_notification_body">There\'s never a better time to work out!</string>
 </resources>
