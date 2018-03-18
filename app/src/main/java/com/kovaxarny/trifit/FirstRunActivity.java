@@ -14,7 +14,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.kovaxarny.trifit.data.workout.ExerciseDbHelper;
-import com.kovaxarny.trifit.utilities.TestUtil;
+import com.kovaxarny.trifit.utilities.PreferenceUtil;
+import com.kovaxarny.trifit.utilities.PrePopulateDBUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -45,7 +46,7 @@ public class FirstRunActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_start);
 
-        TestUtil.insertFakeData(dbHelper.getWritableDatabase());
+        PrePopulateDBUtil.insertExerciseData(dbHelper.getWritableDatabase());
 
         year_x = calendar.get(Calendar.YEAR);
         month_x = calendar.get(Calendar.MONTH);
@@ -79,10 +80,7 @@ public class FirstRunActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent output = new Intent();
                 if (firstName.length() != 0 && lastName.length() != 0 && birthDay.length() != 0 && weight.length() != 0 && height.length() != 0) {
-                    getSharedPreferences("com.kovaxarny.trifit.Preferences", MODE_PRIVATE)
-                            .edit()
-                            .putBoolean("isFirstRun", false)
-                            .apply();
+                    PreferenceUtil.turnOffFirstRun(getBaseContext());
                     output.putExtra("firstName", firstName.getText().toString());
                     output.putExtra("lastName", lastName.getText().toString());
                     output.putExtra("birthDay", birthDay.getText().toString());

@@ -2,7 +2,6 @@ package com.kovaxarny.trifit;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -34,6 +33,7 @@ import com.kovaxarny.trifit.drawer.SettingsActivity;
 import com.kovaxarny.trifit.drawer.WorkoutProgramsActivity;
 import com.kovaxarny.trifit.rss.RSSObject;
 import com.kovaxarny.trifit.statistics.BodyIndex;
+import com.kovaxarny.trifit.utilities.PreferenceUtil;
 
 import java.util.Locale;
 
@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity
     private static final String RSS_LINK = "https://www.bodybuilding.com/rss/articles";
     private static final String RSS_TO_JSON_API = " https://api.rss2json.com/v1/api.json?rss_url=";
 
-    private SharedPreferences preferences;
     private TextView tvUserName;
     private TextView tvUserBirthDate;
     private TextView tvUserBMI;
@@ -94,7 +93,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         /* Making our preferences available in the whole activity */
-        preferences = getSharedPreferences("com.kovaxarny.trifit.Preferences", MODE_PRIVATE);
+
 
         /* Accessing the db behind the app */
         bodyStatsOperations = new BodyStatsOperations(dbHelper);
@@ -148,7 +147,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onResume() {
         super.onResume();
-        if (preferences.getBoolean("isFirstRun", true)) {
+        if (PreferenceUtil.isFirstRun(this)) {
             Intent startFirstRunActivityIntent = new Intent(MainActivity.this, FirstRunActivity.class);
             startActivityForResult(startFirstRunActivityIntent, firstRunActivityCode);
         } else {
@@ -159,13 +158,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == firstRunActivityCode && resultCode == RESULT_OK && data != null) {
-            getSharedPreferences("com.kovaxarny.trifit.Preferences", MODE_PRIVATE)
-                    .edit()
-                    .putString("firstName", data.getStringExtra("firstName"))
-                    .putString("lastName", data.getStringExtra("lastName"))
-                    .putString("birthDay", data.getStringExtra("birthDay"))
-                    .putString("gender", data.getStringExtra("gender"))
-                    .apply();
+            PreferenceUtil.createBaseUserData(this, data);
 
             BodyStatsModel model = new BodyStatsModel();
             model.setHeight(data.getIntExtra("height", 1));
@@ -193,10 +186,8 @@ public class MainActivity extends AppCompatActivity
         tvUserBMI = (TextView) headerView.findViewById(R.id.tv_bmi);
         tvUserBMR = (TextView) headerView.findViewById(R.id.tv_bmr);
 
-        String result = preferences.getString("firstName", "firstName") + " " + preferences.getString("lastName", "lastName");
-
-        tvUserName.setText(result);
-        tvUserBirthDate.setText(preferences.getString("birthDay", "birthDay"));
+        tvUserName.setText(PreferenceUtil.getFullName(this));
+        tvUserBirthDate.setText(PreferenceUtil.getBirthDate(this));
 
         BodyStatsModel model = bodyStatsOperations.getLatestData();
         if (model != null){
@@ -209,14 +200,11 @@ public class MainActivity extends AppCompatActivity
                     bodyIndex.calculateBasalMetabolicRate(
                             model.getHeight(),
                             model.getWeight(),
-                            preferences.getString("gender", "gender"),
-                            preferences.getString("birthDay", "birthDay")
+                            PreferenceUtil.getGender(this),
+                            PreferenceUtil.getBirthDate(this)
                     )));
         }else{
-            getSharedPreferences("com.kovaxarny.trifit.Preferences", MODE_PRIVATE)
-                    .edit()
-                    .putBoolean("isFirstRun", true)
-                    .apply();
+            PreferenceUtil.turnOnFirstRun(this);
             onResume();
         }
 
@@ -276,10 +264,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(startAboutActivityIntent);
         } else if (id == R.id.nav_reset) {
             //TODO this 4 lines has to be deleted, before release. Now its in just for testing
-            getSharedPreferences("com.kovaxarny.trifit.Preferences", MODE_PRIVATE)
-                    .edit()
-                    .putBoolean("isFirstRun", true)
-                    .apply();
+            PreferenceUtil.turnOnFirstRun(this);
             bodyStatsOperations.deleteData();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

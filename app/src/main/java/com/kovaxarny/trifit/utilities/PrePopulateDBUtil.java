@@ -9,9 +9,9 @@ import com.kovaxarny.trifit.data.workout.ExerciseContract;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestUtil {
+public class PrePopulateDBUtil {
 
-    public static void insertFakeData(SQLiteDatabase db) {
+    public static void insertExerciseData(SQLiteDatabase db) {
         if (db == null) {
             return;
         }
