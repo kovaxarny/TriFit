@@ -74,7 +74,7 @@ public class NotificationUtil {
                 ignoreReminderIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Action ignoreReminderAction = new NotificationCompat.Action(R.drawable.ic_cancel,
-                "No, thanks.",
+                "Nah... maybe later",
                 ignoreReminderPendingIntent);
         return ignoreReminderAction;
     }
