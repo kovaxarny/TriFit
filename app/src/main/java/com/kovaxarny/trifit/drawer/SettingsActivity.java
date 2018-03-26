@@ -1,14 +1,13 @@
 package com.kovaxarny.trifit.drawer;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.Button;
 
 import com.kovaxarny.trifit.R;
-import com.kovaxarny.trifit.utilities.NotificationUtil;
+import com.kovaxarny.trifit.notifications.ReminderUtilities;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -17,13 +16,12 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        TextView mDisplayText = (TextView) findViewById(R.id.tv_settings_activity);
+        Button testNotificationButton = (Button) findViewById(R.id.button_Test_Notification);
+        Button cancelNotificationButton = (Button) findViewById(R.id.cancel_Test_Notification);
 
-        Intent callerIntent = getIntent();
+        testNotificationButton.setOnClickListener(testNotificationListener);
+        cancelNotificationButton.setOnClickListener(cancelTestNotificationListener);
 
-        if (callerIntent.hasExtra("Text")) {
-            mDisplayText.setText(callerIntent.getStringExtra("Text"));
-        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -31,7 +29,18 @@ public class SettingsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    public void testNotification(View view) {
-        NotificationUtil.remindUserToWorkout(this);
-    }
+    View.OnClickListener testNotificationListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            ReminderUtilities.scheduleChargingReminder(getApplicationContext());
+        }
+    };
+
+    View.OnClickListener cancelTestNotificationListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            ReminderUtilities.cancelWorkoutReminder(getApplicationContext());
+        }
+    };
+
 }

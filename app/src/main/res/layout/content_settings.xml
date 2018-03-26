@@ -8,17 +8,26 @@
     tools:context="com.kovaxarny.trifit.drawer.SettingsActivity"
     tools:showIn="@layout/activity_settings">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_settings_activity"
-        android:textSize="24sp" />
-
     <Button
+        android:id="@+id/button_Test_Notification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
         android:gravity="center"
-        android:onClick="testNotification"
-        android:text="Test Notification"/>
+        android:text="Test Notification"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/cancel_Test_Notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:text="Cancel Notification"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
