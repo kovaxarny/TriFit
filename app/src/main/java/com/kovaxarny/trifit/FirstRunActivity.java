@@ -71,7 +71,15 @@ public class FirstRunActivity extends AppCompatActivity {
         height = (EditText) findViewById(R.id.et_height);
         weight = (EditText) findViewById(R.id.et_weight);
 
+        setSwitchesToFalse();
+
+
         onSubmit();
+    }
+
+    private void setSwitchesToFalse() {
+        PreferenceUtil.saveSwitchState(getBaseContext(),"workout_switch",false);
+        PreferenceUtil.saveSwitchState(getBaseContext(),"logging_switch",false);
     }
 
     private void onSubmit() {

@@ -18,7 +18,7 @@
         <item
             android:id="@+id/nav_challanges"
             android:icon="@drawable/ic_timer_black_24dp"
-            android:title="@string/challanges" />
+            android:title="@string/challenges" />
     </group>
     <group
         android:id="@+id/nav_group_bot"
@@ -32,11 +32,6 @@
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_help_black_24dp"
             android:title="@string/about" />
-        <item
-            android:id="@+id/nav_reset"
-            android:title="@string/reset"
-            android:icon="@android:drawable/ic_menu_revert" />
-
     </group>
 
 </menu>

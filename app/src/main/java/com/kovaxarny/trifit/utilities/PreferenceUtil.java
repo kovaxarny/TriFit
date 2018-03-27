@@ -61,4 +61,16 @@ public class PreferenceUtil {
         editor.putBoolean(IS_FIRST_RUN, false)
                 .apply();
     }
+
+    public static void saveSwitchState(Context context,String key, boolean b) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(key, b)
+                .apply();
+    }
+
+    public static boolean restoreSwitchState(Context context, String key) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getBoolean(key,true);
+    }
 }

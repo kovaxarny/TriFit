@@ -44,6 +44,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_Main_Notifications" />
 
+    <Switch
+        android:id="@+id/switch_workout_reminder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_Daily_Notif"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_Daily_Notif" />
+
     <View
         android:id="@+id/hrNotif_1"
         android:layout_width="0dp"
@@ -67,6 +76,15 @@
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hrNotif_1" />
+
+    <Switch
+        android:id="@+id/switch_logging_reminder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_Weekly_Notif"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_Weekly_Notif" />
 
     <TextView
         android:id="@+id/tv_Main_Data"
@@ -113,23 +131,5 @@
         app:layout_constraintBottom_toBottomOf="@+id/tv_delete_data"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_delete_data" />
-
-    <Switch
-        android:id="@+id/switch_workout_reminder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_Daily_Notif"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_Daily_Notif" />
-
-    <Switch
-        android:id="@+id/switch_logging_reminder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_Weekly_Notif"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_Weekly_Notif" />
 
 </android.support.constraint.ConstraintLayout>

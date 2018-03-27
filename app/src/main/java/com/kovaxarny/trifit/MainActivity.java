@@ -262,10 +262,6 @@ public class MainActivity extends AppCompatActivity
             Intent startAboutActivityIntent = new Intent(MainActivity.this, AboutActivity.class);
             startAboutActivityIntent.putExtra("Text", "Drawer > About: " + id);
             startActivity(startAboutActivityIntent);
-        } else if (id == R.id.nav_reset) {
-            //TODO this 4 lines has to be deleted, before release. Now its in just for testing
-            PreferenceUtil.turnOnFirstRun(this);
-            bodyStatsOperations.deleteData();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
