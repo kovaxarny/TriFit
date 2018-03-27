@@ -1,6 +1,8 @@
 package com.kovaxarny.trifit.drawer;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -47,8 +49,24 @@ public class SettingsActivity extends AppCompatActivity {
     View.OnClickListener deleteDataButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            PreferenceUtil.turnOnFirstRun(getApplicationContext());
-            bodyStatsOperations.deleteData();
+
+            final AlertDialog alertDialog = new AlertDialog.Builder(SettingsActivity.this).create(); //Read Update
+            alertDialog.setTitle("Warning");
+            alertDialog.setMessage("Are you sure to delete all data?");
+
+            alertDialog.setButton(DialogInterface.BUTTON_POSITIVE,"Yes",new DialogInterface.OnClickListener(){
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    PreferenceUtil.turnOnFirstRun(getApplicationContext());
+                    bodyStatsOperations.deleteData();
+                }
+            });
+            alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE,"No",new DialogInterface.OnClickListener(){
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                }
+            });
+            alertDialog.show();
         }
     };
 
