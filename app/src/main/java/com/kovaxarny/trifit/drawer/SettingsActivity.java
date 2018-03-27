@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import com.kovaxarny.trifit.R;
 import com.kovaxarny.trifit.notifications.ReminderUtilities;
+import com.kovaxarny.trifit.utilities.NotificationUtil;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -32,7 +33,8 @@ public class SettingsActivity extends AppCompatActivity {
     View.OnClickListener testNotificationListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            ReminderUtilities.scheduleChargingReminder(getApplicationContext());
+//            ReminderUtilities.scheduleWorkoutReminder(getApplicationContext());
+            NotificationUtil.remindUserToLog(getApplicationContext());
         }
     };
 
