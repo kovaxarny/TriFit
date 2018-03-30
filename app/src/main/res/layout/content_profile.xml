@@ -9,9 +9,360 @@
     tools:showIn="@layout/activity_profile">
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/not_firstName"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_profile_activity"
-        android:textSize="24sp" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="First Name"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <View
+        android:id="@+id/hr_firstName"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/primary_dark"
+        app:layout_constraintBottom_toBottomOf="@+id/not_firstName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/not_firstName"
+        app:layout_constraintTop_toTopOf="@+id/not_firstName" />
+
+    <TextView
+        android:id="@+id/tv_firstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/not_firstName" />
+
+    <TextView
+        android:id="@+id/not_lastName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Last Name"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_firstName" />
+
+    <View
+        android:id="@+id/hr_lastName"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/primary_dark"
+        app:layout_constraintBottom_toBottomOf="@+id/not_lastName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/not_lastName"
+        app:layout_constraintTop_toTopOf="@+id/not_lastName" />
+
+    <TextView
+        android:id="@+id/tv_lastName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/not_lastName" />
+
+    <TextView
+        android:id="@+id/not_birthDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Birth Date"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lastName" />
+
+    <View
+        android:id="@+id/hr_birthDate"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/primary_dark"
+        app:layout_constraintBottom_toBottomOf="@+id/not_birthDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/not_birthDate"
+        app:layout_constraintTop_toTopOf="@+id/not_birthDate" />
+
+    <TextView
+        android:id="@+id/tv_birthDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/not_birthDate" />
+
+    <TextView
+        android:id="@+id/not_gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Gender"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_birthDate" />
+
+    <View
+        android:id="@+id/hr_gender"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/primary_dark"
+        app:layout_constraintBottom_toBottomOf="@+id/not_gender"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/not_gender"
+        app:layout_constraintTop_toTopOf="@+id/not_gender" />
+
+    <TextView
+        android:id="@+id/tv_gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/not_gender" />
+
+    <TextView
+        android:id="@+id/not_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Your Progress"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_gender" />
+
+
+    <View
+        android:id="@+id/hr_progress1"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/primary_dark"
+        app:layout_constraintBottom_toBottomOf="@+id/not_progress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/not_progress"
+        app:layout_constraintTop_toTopOf="@+id/not_progress" />
+
+    <View
+        android:id="@+id/hr_progress2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/primary_dark"
+        app:layout_constraintBottom_toBottomOf="@+id/not_progress"
+        app:layout_constraintEnd_toStartOf="@+id/not_progress"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/not_progress" />
+
+    <TextView
+        android:id="@+id/not_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:text="Weight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/not_progress" />
+
+    <TextView
+        android:id="@+id/not_BMI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="BMI"
+        app:layout_constraintBottom_toTopOf="@+id/not_BMR"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/not_weight" />
+
+    <TextView
+        android:id="@+id/not_BMR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="BMR"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/not_then"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Then"
+        app:layout_constraintBottom_toTopOf="@+id/not_weight"
+        app:layout_constraintEnd_toStartOf="@+id/not_weight"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/not_progress" />
+
+    <TextView
+        android:id="@+id/not_now"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Now"
+        app:layout_constraintBottom_toTopOf="@+id/not_weight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/not_weight"
+        app:layout_constraintTop_toBottomOf="@+id/not_progress" />
+
+    <TextView
+        android:id="@+id/tv_then_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/not_then"
+        app:layout_constraintStart_toStartOf="@+id/not_then"
+        app:layout_constraintTop_toBottomOf="@+id/not_then" />
+
+    <TextView
+        android:id="@+id/tv_then_BMI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/tv_then_BMR"
+        app:layout_constraintEnd_toEndOf="@+id/tv_then_weight"
+        app:layout_constraintStart_toStartOf="@+id/tv_then_weight"
+        app:layout_constraintTop_toBottomOf="@+id/tv_then_weight" />
+
+    <TextView
+        android:id="@+id/tv_then_BMR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tv_then_BMI"
+        app:layout_constraintStart_toStartOf="@+id/tv_then_BMI" />
+
+    <TextView
+        android:id="@+id/tv_now_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/not_now"
+        app:layout_constraintHorizontal_bias="0.368"
+        app:layout_constraintStart_toStartOf="@+id/not_now"
+        app:layout_constraintTop_toBottomOf="@+id/not_now" />
+
+    <TextView
+        android:id="@+id/tv_now_BMI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/tv_now_BMR"
+        app:layout_constraintEnd_toEndOf="@+id/tv_now_weight"
+        app:layout_constraintStart_toStartOf="@+id/tv_now_weight"
+        app:layout_constraintTop_toBottomOf="@+id/tv_now_weight" />
+
+    <TextView
+        android:id="@+id/tv_now_BMR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tv_now_BMI"
+        app:layout_constraintStart_toStartOf="@+id/tv_now_BMI" />
+
+    <View
+        android:id="@+id/hr_horiz1"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/primary_dark"
+        app:layout_constraintBottom_toTopOf="@+id/not_weight"
+        app:layout_constraintEnd_toEndOf="@+id/not_progress"
+        app:layout_constraintStart_toStartOf="@+id/not_progress"
+        app:layout_constraintTop_toBottomOf="@+id/not_progress" />
+
+    <View
+        android:id="@+id/hr_horiz2"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/primary_dark"
+        app:layout_constraintBottom_toTopOf="@+id/not_BMI"
+        app:layout_constraintEnd_toEndOf="@+id/not_weight"
+        app:layout_constraintStart_toStartOf="@+id/not_weight"
+        app:layout_constraintTop_toBottomOf="@+id/not_weight" />
+
+    <View
+        android:id="@+id/hr_horiz3"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/primary_dark"
+        app:layout_constraintBottom_toTopOf="@+id/not_BMR"
+        app:layout_constraintEnd_toEndOf="@+id/not_BMI"
+        app:layout_constraintStart_toStartOf="@+id/not_BMI"
+        app:layout_constraintTop_toBottomOf="@+id/not_BMI" />
 </android.support.constraint.ConstraintLayout>
