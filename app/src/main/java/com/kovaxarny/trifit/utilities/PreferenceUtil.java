@@ -35,7 +35,8 @@ public class PreferenceUtil {
 
     public static String getFullName(Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return preferences.getString(FIRST_NAME, "firstName") + " " + preferences.getString(LAST_NAME, "lastName");
+        return preferences.getString(FIRST_NAME, "firstName") + " " +
+                preferences.getString(LAST_NAME, "lastName");
     }
 
     public static String getBirthDate(Context context) {
@@ -72,5 +73,15 @@ public class PreferenceUtil {
     public static boolean restoreSwitchState(Context context, String key) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getBoolean(key,true);
+    }
+
+    public static String getFirstName(Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString(FIRST_NAME, "firstName");
+    }
+
+    public static String getLastName(Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString(LAST_NAME, "lastName");
     }
 }

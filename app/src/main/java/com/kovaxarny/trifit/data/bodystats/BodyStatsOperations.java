@@ -80,4 +80,32 @@ public class BodyStatsOperations {
 
         return stats.get_id() != null ? stats : null;
     }
+
+    public BodyStatsModel getFirstData() {
+        BodyStatsModel stats = new BodyStatsModel();
+
+        Cursor mCursor = mDb.query(
+                BodyStatsContract.BodyStatsEntry.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                BodyStatsContract.BodyStatsEntry._ID + " ASC",
+                "1"
+        );
+
+        if (mCursor.moveToFirst()) {
+            do {
+                stats.set_id(mCursor.getInt(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry._ID)));
+                stats.setHeight(mCursor.getInt(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry.COLUMN_HEIGHT)));
+                stats.setWeight(mCursor.getDouble(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry.COLUMN_WEIGHT)));
+                stats.setTimestamp(mCursor.getString(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry.COLUMN_TIMESTAMP)));
+            } while (mCursor.moveToNext());
+        }
+
+        mCursor.close();
+
+        return stats.get_id() != null ? stats : null;
+    }
 }
