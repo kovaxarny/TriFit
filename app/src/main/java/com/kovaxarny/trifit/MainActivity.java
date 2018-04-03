@@ -13,12 +13,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.google.gson.Gson;
 import com.kovaxarny.trifit.adapter.RSSFeedAdapter;
 import com.kovaxarny.trifit.common.CheckNetwork;
@@ -35,6 +41,7 @@ import com.kovaxarny.trifit.rss.RSSObject;
 import com.kovaxarny.trifit.statistics.BodyIndex;
 import com.kovaxarny.trifit.utilities.PreferenceUtil;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity
@@ -61,6 +68,10 @@ public class MainActivity extends AppCompatActivity
 
     private BodyStatsDbHelper dbHelper = new BodyStatsDbHelper(this);
     private BodyStatsOperations bodyStatsOperations = null;
+
+    //Chart things
+    private LineChart lineChart;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +123,58 @@ public class MainActivity extends AppCompatActivity
         rssFeedRecycleView.setLayoutManager(linearLayoutManager);
 
         loadRSS();
+
+        /*Chart things*/
+        lineChart = (LineChart) findViewById(R.id.chart);
+
+        fillChartWithData();
+
     }
+
+    private void fillChartWithData() {
+
+        ArrayList<Entry> yValues = new ArrayList<Entry>();
+        yValues = bodyStatsOperations.getLastTenEntry();
+
+        float referenceTimeStamp = yValues.get(0).getX();
+        for (Entry entry : yValues){
+            entry.setX(entry.getX() - referenceTimeStamp);
+            Log.d(TAG, "fillChartWithData: entry " + entry.getX());
+        }
+
+//        yValues.add(new Entry(0,60f));
+//        yValues.add(new Entry(1,50f));
+//        yValues.add(new Entry(2,20f));
+//        yValues.add(new Entry(3,10f));
+//        yValues.add(new Entry(4,50f));
+//        yValues.add(new Entry(5,80f));
+//        yValues.add(new Entry(6,30f));
+
+        LineDataSet set1 = new LineDataSet(yValues,"Data Set 1");
+
+        set1.setFillAlpha(R.color.accent);
+        set1.setColor(R.color.accent);
+        set1.setLineWidth(3f);
+        set1.setCircleColor(R.color.accent);
+
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(set1);
+
+        LineData data = new LineData(dataSets);
+
+        data.notifyDataChanged(); // let the data know a dataSet changed
+        lineChart.notifyDataSetChanged(); // let the chart know it's data changed
+        lineChart.invalidate(); // refresh
+
+        lineChart.setScaleEnabled(false);
+        lineChart.setData(data);
+
+
+
+    }
+
+    //TODO scrollview, datasetchanged
+
 
     private void loadRSS() {
         if (CheckNetwork.isInternetAvailable(MainActivity.this)) {
@@ -153,6 +215,8 @@ public class MainActivity extends AppCompatActivity
         } else {
             updateUserInfo();
         }
+
+        fillChartWithData();
     }
 
     @Override
