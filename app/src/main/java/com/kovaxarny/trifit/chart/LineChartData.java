@@ -62,6 +62,7 @@ public class LineChartData {
         lineChart.notifyDataSetChanged(); // let the chart know it's data changed
         lineChart.invalidate(); // refresh
 
+        lineChart.getDescription().setEnabled(false);
         lineChart.setScaleEnabled(false);
         lineChart.setData(data);
     }
