@@ -41,4 +41,5 @@
     <string name="workout_reminder_notification_body">There\'s never a better time to work out!</string>
     <string name="log_reminder_notification_title">It\'s time to log!</string>
     <string name="log_reminder_notification_body">Log your weight for progress tracking.</string>
+    <string name="useful_informations">Informations</string>
 </resources>

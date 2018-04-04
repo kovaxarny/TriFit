@@ -30,6 +30,7 @@ import com.kovaxarny.trifit.data.bodystats.BodyStatsModel;
 import com.kovaxarny.trifit.data.bodystats.BodyStatsOperations;
 import com.kovaxarny.trifit.drawer.AboutActivity;
 import com.kovaxarny.trifit.drawer.ChallengesActivity;
+import com.kovaxarny.trifit.drawer.InformationActivity;
 import com.kovaxarny.trifit.drawer.ProfileActivity;
 import com.kovaxarny.trifit.drawer.SettingsActivity;
 import com.kovaxarny.trifit.drawer.WorkoutProgramsActivity;
@@ -263,11 +264,9 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_profile) {
             Intent startProfileActivityIntent = new Intent(MainActivity.this, ProfileActivity.class);
-            startProfileActivityIntent.putExtra("Text", "Drawer > Profile: " + id);
             startActivity(startProfileActivityIntent);
         } else if (id == R.id.nav_workout_programs) {
             Intent startWorkoutProgramsActivityIntent = new Intent(MainActivity.this, WorkoutProgramsActivity.class);
-            startWorkoutProgramsActivityIntent.putExtra("Text", "Drawer > WorkoutModel Programs: " + id);
             startActivity(startWorkoutProgramsActivityIntent);
         } else if (id == R.id.nav_challanges) {
             Intent startChallengesActivityIntent = new Intent(MainActivity.this, ChallengesActivity.class);
@@ -275,11 +274,12 @@ public class MainActivity extends AppCompatActivity
             startActivity(startChallengesActivityIntent);
         } else if (id == R.id.nav_settings) {
             Intent startSettingsActivityIntent = new Intent(MainActivity.this, SettingsActivity.class);
-            startSettingsActivityIntent.putExtra("Text", "Drawer > Settings: " + id);
             startActivity(startSettingsActivityIntent);
         } else if (id == R.id.nav_about) {
             Intent startAboutActivityIntent = new Intent(MainActivity.this, AboutActivity.class);
-            startAboutActivityIntent.putExtra("Text", "Drawer > About: " + id);
+            startActivity(startAboutActivityIntent);
+        }        else if (id == R.id.nav_informations) {
+            Intent startAboutActivityIntent = new Intent(MainActivity.this, InformationActivity.class);
             startActivity(startAboutActivityIntent);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
