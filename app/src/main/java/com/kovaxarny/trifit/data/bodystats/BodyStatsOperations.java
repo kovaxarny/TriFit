@@ -129,23 +129,17 @@ public class BodyStatsOperations {
                 null,
                 null,
                 null,
+                BodyStatsContract.BodyStatsEntry.COLUMN_TIMESTAMP,
                 null,
-                null,
-                BodyStatsContract.BodyStatsEntry._ID + " ASC",
+                BodyStatsContract.BodyStatsEntry.COLUMN_TIMESTAMP + " ASC",
                 "10"
         );
 
         if (mCursor.moveToFirst()) {
             do {
+                float convertedTimeStampToFloat = formatDate(mCursor.getString(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry.COLUMN_TIMESTAMP)));
+                entries.add(new Entry(convertedTimeStampToFloat,(float) mCursor.getDouble(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry.COLUMN_WEIGHT))));
 
-
-                float convertedTimeStamp = formatDate(mCursor.getString(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry.COLUMN_TIMESTAMP)));
-                entries.add(new Entry(convertedTimeStamp,(float) mCursor.getDouble(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry.COLUMN_WEIGHT))));
-
-//                stats.set_id(mCursor.getInt(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry._ID)));
-//                stats.setHeight(mCursor.getInt(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry.COLUMN_HEIGHT)));
-//                stats.setWeight(mCursor.getDouble(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry.COLUMN_WEIGHT)));
-//                stats.setTimestamp(mCursor.getString(mCursor.getColumnIndex(BodyStatsContract.BodyStatsEntry.COLUMN_TIMESTAMP)));
             } while (mCursor.moveToNext());
         }
 
