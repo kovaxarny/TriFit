@@ -12,8 +12,8 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.kovaxarny.trifit.R;
 import com.kovaxarny.trifit.data.bodystats.BodyStatsOperations;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -32,7 +32,10 @@ public class LineChartData {
 
         float referenceTimeStampInFloat = yValues.get(0).getX();
         Date date = new Date((long)referenceTimeStampInFloat);
-        Timestamp referenceTimeStamp = new Timestamp(date.getTime());
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.DATE, 1); //minus number would decrement the days
+        date = cal.getTime();
 
         for (Entry entry : yValues) {
             entry.setX(entry.getX() - referenceTimeStampInFloat);
