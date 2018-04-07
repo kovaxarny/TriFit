@@ -25,7 +25,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".drawer.ProfileActivity"
             android:label="@string/title_activity_profile"
@@ -35,7 +34,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kovaxarny.trifit.MainActivity" />
         </activity>
-
         <activity
             android:name=".drawer.WorkoutProgramsActivity"
             android:label="@string/title_activity_workout_programs"
@@ -45,7 +43,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kovaxarny.trifit.MainActivity" />
         </activity>
-
         <activity
             android:name=".drawer.ChallengesActivity"
             android:label="@string/title_activity_challenges"
@@ -55,7 +52,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kovaxarny.trifit.MainActivity" />
         </activity>
-
         <activity
             android:name=".drawer.SettingsActivity"
             android:label="@string/title_activity_settings"
@@ -65,7 +61,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kovaxarny.trifit.MainActivity" />
         </activity>
-
         <activity
             android:name=".drawer.AboutActivity"
             android:label="@string/title_activity_about"
@@ -75,13 +70,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kovaxarny.trifit.MainActivity" />
         </activity>
-
         <activity
             android:name=".exercise.ExerciseListActivity"
             android:parentActivityName=".drawer.WorkoutProgramsActivity" />
         <activity android:name=".exercise.ExerciseDetailsActivity" />
-
-        <activity android:name=".drawer.InformationActivity"
+        <activity
+            android:name=".drawer.InformationActivity"
             android:label="Useful Informations"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -89,12 +83,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kovaxarny.trifit.MainActivity" />
         </activity>
-
         <activity
             android:name=".AddBodyStatActivity"
             android:windowSoftInputMode="stateVisible" />
         <activity android:name=".FirstRunActivity" />
-
 
         <service
             android:name=".utilities.NotificationUtil$WorkoutReminderIntentService"
@@ -113,6 +105,8 @@
                 <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
             </intent-filter>
         </service>
+
+        <activity android:name=".exercise.cardio.RunningActivity"></activity>
     </application>
 
 </manifest>

@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.kovaxarny.trifit.R;
 import com.kovaxarny.trifit.data.workout.WorkoutStyleModel;
 import com.kovaxarny.trifit.exercise.ExerciseListActivity;
+import com.kovaxarny.trifit.exercise.cardio.RunningActivity;
 import com.kovaxarny.trifit.rss.ItemClickListener;
 
 import java.util.ArrayList;
@@ -144,10 +144,29 @@ public class WorkoutProgramsAdapter extends RecyclerView.Adapter<WorkoutPrograms
             } else {
                 LinearLayout childLinearLayout = (LinearLayout) view;
                 TextView currentTextView = (TextView) childLinearLayout.getChildAt(0);
-                Toast.makeText(context, "" + currentTextView.getText(), Toast.LENGTH_SHORT).show();
-                Intent startProfileActivityIntent = new Intent(context, ExerciseListActivity.class);
-                startProfileActivityIntent.putExtra("muscle", currentTextView.getText());
-                context.startActivity(startProfileActivityIntent);
+
+                startNewActivity(currentTextView.getText().toString());
+
+            }
+        }
+
+        private void startNewActivity(String name) {
+            if (name.equals("Walking")) {
+                Intent RunningActivityIntent = new Intent(context, RunningActivity.class);
+                context.startActivity(RunningActivityIntent);
+            } else if (name.equals("Running")) {
+                Intent RunningActivityIntent = new Intent(context, RunningActivity.class);
+                context.startActivity(RunningActivityIntent);
+            } else if (name.equals("Bicycle")) {
+                Intent RunningActivityIntent = new Intent(context, RunningActivity.class);
+                context.startActivity(RunningActivityIntent);
+            } else if (name.equals("Skipping")) {
+                Intent RunningActivityIntent = new Intent(context, RunningActivity.class);
+                context.startActivity(RunningActivityIntent);
+            } else {
+                Intent exerciseDetailsActivityIntent = new Intent(context, ExerciseListActivity.class);
+                exerciseDetailsActivityIntent.putExtra("muscle", name);
+                context.startActivity(exerciseDetailsActivityIntent);
             }
         }
     }

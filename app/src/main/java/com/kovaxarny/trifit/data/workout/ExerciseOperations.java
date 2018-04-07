@@ -16,7 +16,7 @@ public class ExerciseOperations {
         this.mDb = dbHelper.getWritableDatabase();
     }
 
-    public Cursor getExerciseByMuscle(String muscle){
+    public Cursor getExercisesByMuscleCursor(String muscle){
         String whereClause = ExerciseContract.ExerciseEntry.COLUMN_MUSCLE + " = ?";
         String[] whereArgs = new String[] {
                 muscle
@@ -30,6 +30,40 @@ public class ExerciseOperations {
                 null,
                 null
         );
+    }
+
+    public ExerciseModel getExerciseByName(String name){
+        String whereClause = ExerciseContract.ExerciseEntry.COLUMN_NAME + " = ?";
+        String[] whereArgs = new String[] {
+                name
+        };
+
+        ExerciseModel exerciseModel = new ExerciseModel();
+
+        Cursor mCursor =  mDb.query(
+                ExerciseContract.ExerciseEntry.TABLE_NAME,
+                null,
+                whereClause,
+                whereArgs,
+                null,
+                null,
+                null
+        );
+
+        if (mCursor.moveToFirst()) {
+            do {
+                exerciseModel.set_id(mCursor.getInt(mCursor.getColumnIndex(ExerciseContract.ExerciseEntry._ID)));
+                exerciseModel.setName(mCursor.getString(mCursor.getColumnIndex(ExerciseContract.ExerciseEntry.COLUMN_NAME)));
+                exerciseModel.setType(mCursor.getString(mCursor.getColumnIndex(ExerciseContract.ExerciseEntry.COLUMN_TYPE)));
+                exerciseModel.setMuscle(mCursor.getString(mCursor.getColumnIndex(ExerciseContract.ExerciseEntry.COLUMN_MUSCLE)));
+                exerciseModel.setDescription(mCursor.getString(mCursor.getColumnIndex(ExerciseContract.ExerciseEntry.COLUMN_DESCRIPTION)));
+                exerciseModel.setEquipment(mCursor.getString(mCursor.getColumnIndex(ExerciseContract.ExerciseEntry.COLUMN_EQUIPMENT)));
+            } while (mCursor.moveToNext());
+        }
+
+        mCursor.close();
+
+        return exerciseModel;
     }
 
     public Cursor getAllExercise() {

@@ -28,12 +28,11 @@ public class ExerciseListActivity extends AppCompatActivity {
         }
 
         ExerciseOperations exerciseOperations = new ExerciseOperations(dbHelper);
-        Cursor cursor = exerciseOperations.getExerciseByMuscle(muscle);
+        Cursor cursor = exerciseOperations.getExercisesByMuscleCursor(muscle);
 
         RecyclerView exerciseListRecycleView = (RecyclerView) findViewById(R.id.exercise_list_rv);
         exerciseListRecycleView.setLayoutManager(new LinearLayoutManager(this));
         ExerciseListAdapter exerciseListAdapter = new ExerciseListAdapter(this, cursor);
         exerciseListRecycleView.setAdapter(exerciseListAdapter);
-
     }
 }
