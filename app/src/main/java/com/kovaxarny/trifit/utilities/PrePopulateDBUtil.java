@@ -189,7 +189,7 @@ public class PrePopulateDBUtil {
                 "2. Now, while keeping your upper arms stationary, exhale and curl the weights forward while contracting the biceps. Focus on only moving your forearms.\n" +
                 "3. Continue to raise the weight until your biceps are fully contracted and the bar is at shoulder level. Hold the top contracted position for a moment and squeeze the biceps.\n" +
                 "4. Then inhale and slowly lower the bar back to the starting position.\n" +
-                "4. Repeat for the recommended amount of repetitions.");
+                "5. Repeat for the recommended amount of repetitions.");
         cv.put(ExerciseContract.ExerciseEntry.COLUMN_EQUIPMENT, "EZ-Bar");
         list.add(cv);
 

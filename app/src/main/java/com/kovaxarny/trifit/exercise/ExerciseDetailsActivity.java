@@ -22,7 +22,9 @@ public class ExerciseDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_details);
 
-        TextView tvMuscleName = (TextView) findViewById(R.id.tv_muscleName);
+        TextView tvMuscleDesc = (TextView) findViewById(R.id.tv_muscleDesc);
+        TextView tvMuscleEquipment = (TextView) findViewById(R.id.tv_muscleEquipment);
+
 
         String exerciseName = null;
         Intent callerIntent = getIntent();
@@ -33,6 +35,10 @@ public class ExerciseDetailsActivity extends AppCompatActivity {
         exerciseOperations = new ExerciseOperations(dbHelper);
         exerciseModel = exerciseOperations.getExerciseByName(exerciseName);
 
-        tvMuscleName.setText(exerciseModel.toString());
+        setTitle(exerciseModel.getName());
+
+        tvMuscleDesc.setText(exerciseModel.getDescription());
+        tvMuscleEquipment.setText(exerciseModel.getEquipment());
+
     }
 }
