@@ -40,4 +40,78 @@
         android:textStyle="italic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_muscleDesc" />
+
+    <Button
+        android:id="@+id/btn_exercisecomplete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:backgroundTint="@color/accent"
+        android:text="Exercise Complete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/et_setsLog"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:hint="Sets"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/btn_exercisecomplete"
+        app:layout_constraintEnd_toStartOf="@+id/et_repsLog"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/et_weightLog"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:hint="Weight"
+        android:inputType="number"
+        android:textAlignment="textEnd"
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_repsLog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/et_repsLog" />
+
+    <EditText
+        android:id="@+id/et_repsLog"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Reps"
+        android:inputType="number"
+        android:textAlignment="center"
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_setsLog"
+        app:layout_constraintEnd_toEndOf="@+id/btn_exercisecomplete"
+        app:layout_constraintStart_toStartOf="@+id/btn_exercisecomplete" />
+
+    <TextView
+        android:id="@+id/not_lastWorkout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Last Workout: "
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/et_setsLog"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_lastWorkout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="TextView"
+        app:layout_constraintBaseline_toBaselineOf="@+id/not_lastWorkout"
+        app:layout_constraintStart_toEndOf="@+id/not_lastWorkout" />
+
 </android.support.constraint.ConstraintLayout>

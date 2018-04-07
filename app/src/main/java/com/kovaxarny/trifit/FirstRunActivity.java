@@ -69,7 +69,7 @@ public class FirstRunActivity extends AppCompatActivity {
         firstName = (EditText) findViewById(R.id.et_first_name);
         lastName = (EditText) findViewById(R.id.et_last_name);
         height = (EditText) findViewById(R.id.et_height);
-        weight = (EditText) findViewById(R.id.et_weight);
+        weight = (EditText) findViewById(R.id.et_weightLog);
 
         setSwitchesToFalse();
 

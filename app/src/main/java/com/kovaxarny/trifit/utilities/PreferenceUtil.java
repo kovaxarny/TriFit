@@ -84,4 +84,16 @@ public class PreferenceUtil {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getString(LAST_NAME, "lastName");
     }
+
+    public static void saveWorkoutPerformance(Context context, String id, String workout) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(id, workout)
+                .apply();
+    }
+
+    public static String getLastPerformance(Context context, String s) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString(s,"There is no previous workout for this exercise.");
+    }
 }
